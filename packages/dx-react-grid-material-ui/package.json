@@ -94,10 +94,10 @@
     "@devexpress/dx-grid-core": "3.0.0-beta.1",
     "@devexpress/dx-react-core": "3.0.0-beta.1",
     "@devexpress/dx-react-grid": "3.0.0-beta.1",
-    "@mui/icons-material": ">=5.0.0",
-    "@mui/lab": "^5.0.0-alpha.50",
-    "@mui/material": ">=5.0.0",
-    "@mui/styles": ">=5.0.0",
+    "@mui/icons-material": ">=5.0.5",
+    "@mui/lab": "^5.0.0-alpha.53",
+    "@mui/material": ">=5.0.6",
+    "@mui/styles": ">=5.0.2",
     "react": ">=17.0.2"
   }
 }

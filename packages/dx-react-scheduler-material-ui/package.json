@@ -95,10 +95,10 @@
     "@devexpress/dx-scheduler-core": "3.0.0-beta.1",
     "@emotion/react": ">=11.4.1",
     "@emotion/styled": ">=11.3.0",
-    "@mui/icons-material": ">=5.0.0",
-    "@mui/lab": "^5.0.0-alpha.50",
-    "@mui/material": ">=5.0.0",
-    "@mui/styles": ">=5.0.0",
+    "@mui/icons-material": ">=5.0.5",
+    "@mui/lab": "^5.0.0-alpha.53",
+    "@mui/material": ">=5.0.6",
+    "@mui/styles": ">=5.0.2",
     "moment": "^2.24.0",
     "react": ">=17.0.2"
   }
