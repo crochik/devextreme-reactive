@@ -1,26 +1,31 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Chip from '@mui/material/Chip';
-import withStyles from '@mui/styles/withStyles';
+import { TableSortLabel, Chip, styled } from '@mui/material';
 
-const ENTER_KEY_CODE = 13;
-const SPACE_KEY_CODE = 32;
+const PREFIX = 'GroupPanelItem';
+export const classes = {
+  button: `${PREFIX}-button`,
+  withoutIcon: `${PREFIX}-withoutIcon`,
+  draftCell: `${PREFIX}-draftCell`,
+};
 
-const styles = theme => ({
-  button: {
+const StyledChip = styled(Chip)(({ theme }) => ({
+  [`&.${classes.button}`]: {
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(1.5),
   },
-  withoutIcon: {
+  [`&.${classes.withoutIcon}`]: {
     paddingRight: '13px',
     paddingLeft: '13px',
   },
-  draftCell: {
+  [`&.${classes.draftCell}`]: {
     opacity: 0.3,
   },
-});
+}));
+
+const ENTER_KEY_CODE = 13;
+const SPACE_KEY_CODE = 32;
 
 const label = (showSortingControls, sortingEnabled, sortingDirection, column, hovered) => {
   const title = column.title || column.name;
@@ -39,12 +44,12 @@ const label = (showSortingControls, sortingEnabled, sortingDirection, column, ho
     : title;
 };
 
-const GroupPanelItemBase = ({
+export const GroupPanelItem = ({
   item: { column, draft },
   onGroup, showGroupingControls,
   showSortingControls, sortingDirection, onSort,
   sortingEnabled, groupingEnabled,
-  classes, className, forwardedRef,
+  className, forwardedRef,
   ...restProps
 }) => {
   const [hovered, setHovered] = React.useState(false);
@@ -68,7 +73,7 @@ const GroupPanelItemBase = ({
   };
 
   return (
-    <Chip
+    <StyledChip
       ref={forwardedRef}
       label={label(showSortingControls, sortingEnabled, sortingDirection, column, hovered)}
       className={chipClassNames}
@@ -87,7 +92,7 @@ const GroupPanelItemBase = ({
   );
 };
 
-GroupPanelItemBase.propTypes = {
+GroupPanelItem.propTypes = {
   item: PropTypes.shape({
     column: PropTypes.shape({
       title: PropTypes.string,
@@ -100,14 +105,13 @@ GroupPanelItemBase.propTypes = {
   onSort: PropTypes.func,
   onGroup: PropTypes.func,
   showGroupingControls: PropTypes.bool,
-  classes: PropTypes.object.isRequired,
   className: PropTypes.string,
   sortingEnabled: PropTypes.bool,
   groupingEnabled: PropTypes.bool,
   forwardedRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-GroupPanelItemBase.defaultProps = {
+GroupPanelItem.defaultProps = {
   showSortingControls: false,
   sortingEnabled: false,
   sortingDirection: undefined,
@@ -118,5 +122,3 @@ GroupPanelItemBase.defaultProps = {
   className: undefined,
   forwardedRef: undefined,
 };
-
-export const GroupPanelItem = withStyles(styles, { name: 'GroupPanelItem' })(GroupPanelItemBase);

@@ -1,30 +1,34 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import IconButton from '@mui/material/IconButton';
+import { styled, IconButton } from '@mui/material';
+import PropTypes from 'prop-types';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
-import withStyles from '@mui/styles/withStyles';
 import classNames from 'clsx';
 import { SMALL_LAYOUT_MEDIA_QUERY } from '../constants';
 
-const styles = ({ spacing }) => ({
-  button: {
+const PREFIX = 'NavigationButton';
+
+export const classes = {
+  button: `${PREFIX}-button`,
+};
+
+const StyledIconButton = styled(IconButton)(({ theme: { spacing } }) => ({
+  [`&.${classes.button}`]: {
     [`${SMALL_LAYOUT_MEDIA_QUERY}`]: {
       width: spacing(4),
       height: spacing(4),
       padding: 0,
     },
   },
-});
+}));
 
-const NavigationButtonBase = React.memo(({
+export const NavigationButton = React.memo(({
   type,
   onClick,
-  classes,
   className,
   ...restProps
 }) => (
-  <IconButton
+  <StyledIconButton
     onClick={onClick}
     color="primary"
     className={classNames(classes.button, className)}
@@ -32,19 +36,16 @@ const NavigationButtonBase = React.memo(({
     size="large"
   >
     {type === 'back' ? <ChevronLeft /> : <ChevronRight />}
-  </IconButton>
+  </StyledIconButton>
 ));
 
-NavigationButtonBase.propTypes = {
+NavigationButton.propTypes = {
   type: PropTypes.oneOf(['forward', 'back']).isRequired,
   onClick: PropTypes.func,
-  classes: PropTypes.object.isRequired,
   className: PropTypes.string,
 };
 
-NavigationButtonBase.defaultProps = {
+NavigationButton.defaultProps = {
   onClick: () => {},
   className: undefined,
 };
-
-export const NavigationButton = withStyles(styles, { name: 'NavigationButton' })(NavigationButtonBase);

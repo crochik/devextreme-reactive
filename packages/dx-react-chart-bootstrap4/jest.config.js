@@ -1,13 +1,17 @@
-const path = require('path');
+import { URL } from 'url';
 
-module.exports = {
+export default {
   moduleNameMapper: {
-    '.css$': path.join(__dirname, './css-stub.js'),
+    '.css$': new URL('./css-stub.js', import.meta.url).pathname,
   },
+  testEnvironment: 'jsdom',
   setupFiles: [
-    path.join(__dirname, './setup-enzyme.js'),
+    new URL('./setup-enzyme.js', import.meta.url).pathname,
   ],
   transform: {
     '^.+\\.jsx?$': '../../tools/setup-babel-jest.js',
   },
+  transformIgnorePatterns: [
+    '/node_modules/(?!(d3|d3-scale|d3-array|d3-interpolate|d3-color|d3-format|d3-time|d3-time-format|internmap)/)',
+  ],
 };

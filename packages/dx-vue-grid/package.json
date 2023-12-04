@@ -1,7 +1,7 @@
 {
   "name": "@devexpress/dx-vue-grid",
   "private": true,
-  "version": "3.0.0-beta.1",
+  "version": "4.0.6",
   "description": "Composable plugin-based data grid component for Vue",
   "author": {
     "name": "Developer Express Inc.",
@@ -24,7 +24,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/dx-vue-grid.umd.js",
+  "type": "module",
+  "main": "dist/dx-vue-grid.umd.cjs",
   "module": "dist/dx-vue-grid.es.js",
   "globalName": "DevExpress.DXVueGrid",
   "files": [
@@ -40,12 +41,12 @@
     "lint:fix": "yarn lint -- --fix"
   },
   "devDependencies": {
-    "@devexpress/dx-testing": "3.0.0-beta.1",
+    "@devexpress/dx-testing": "4.0.6",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "^6.26.3",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^29.2.2",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -58,7 +59,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.4",
     "eslint-plugin-vue": "^6.0.1",
-    "jest": "^24.9.0",
+    "jest": "^29.2.2",
     "rollup": "^1.27.2",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -68,11 +69,11 @@
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
-    "@devexpress/dx-core": "3.0.0-beta.1",
-    "@devexpress/dx-grid-core": "3.0.0-beta.1"
+    "@devexpress/dx-core": "4.0.6",
+    "@devexpress/dx-grid-core": "4.0.6"
   },
   "peerDependencies": {
-    "@devexpress/dx-vue-core": "3.0.0-beta.1",
+    "@devexpress/dx-vue-core": "4.0.6",
     "vue": ">=2.6.10"
   }
 }

@@ -1,17 +1,22 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import { styled, alpha, TableCell } from '@mui/material';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import TableCell from '@mui/material/TableCell';
-import { alpha } from '@mui/material/styles';
-import withStyles from '@mui/styles/withStyles';
 import {
   VIEW_TYPES, HORIZONTAL_GROUP_ORIENTATION, VERTICAL_GROUP_ORIENTATION,
 } from '@devexpress/dx-scheduler-core';
 import { getBorder, getBrightBorder } from '../utils';
 import { SPACING_CELL_HEIGHT } from '../constants';
 
-const styles = theme => ({
-  cell: {
+const PREFIX = 'Cell';
+
+export const classes = {
+  cell: `${PREFIX}-cell`,
+  brightRightBorder: `${PREFIX}-brightRightBorder`,
+};
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${classes.cell}`]: {
     padding: 0,
     height: theme.spacing(SPACING_CELL_HEIGHT[VIEW_TYPES.ALL_DAY_PANEL]),
     boxSizing: 'border-box',
@@ -30,13 +35,12 @@ const styles = theme => ({
       borderBottom: 'none',
     },
   },
-  brightRightBorder: {
+  [`&.${classes.brightRightBorder}`]: {
     borderRight: getBrightBorder(theme),
   },
-});
+}));
 
-const CellBase = ({
-  classes,
+export const Cell = ({
   className,
   children,
   startDate,
@@ -48,7 +52,7 @@ const CellBase = ({
   hasRightBorder,
   ...restProps
 }) => (
-  <TableCell
+  <StyledTableCell
     tabIndex={0}
     className={classNames({
       [classes.cell]: true,
@@ -58,12 +62,11 @@ const CellBase = ({
     {...restProps}
   >
     {children}
-  </TableCell>
+  </StyledTableCell>
 );
-CellBase.propTypes = {
-  classes: PropTypes.object.isRequired,
-  startDate: PropTypes.instanceOf(Date),
-  endDate: PropTypes.instanceOf(Date),
+Cell.propTypes = {
+  startDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   children: PropTypes.node,
   className: PropTypes.string,
   hasRightBorder: PropTypes.bool,
@@ -72,7 +75,7 @@ CellBase.propTypes = {
   groupOrientation: PropTypes.oneOf([HORIZONTAL_GROUP_ORIENTATION, VERTICAL_GROUP_ORIENTATION]),
 };
 
-CellBase.defaultProps = {
+Cell.defaultProps = {
   children: null,
   startDate: undefined,
   endDate: undefined,
@@ -82,5 +85,3 @@ CellBase.defaultProps = {
   groupingInfo: undefined,
   groupOrientation: HORIZONTAL_GROUP_ORIENTATION,
 };
-
-export const Cell = withStyles(styles, { name: 'Cell' })(CellBase);

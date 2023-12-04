@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { ExpandButton } from './parts/expand-button';
 
@@ -33,7 +33,7 @@ TableDetailToggleCell.propTypes = {
   tableColumn: PropTypes.object,
   tableRow: PropTypes.object,
   row: PropTypes.any,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 TableDetailToggleCell.defaultProps = {

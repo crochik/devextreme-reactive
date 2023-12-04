@@ -1,6 +1,4 @@
-const path = require('path');
-
-module.exports = {
+export default {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },

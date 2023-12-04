@@ -1,30 +1,29 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import TableCell from '@mui/material/TableCell';
-import withStyles from '@mui/styles/withStyles';
+import { TableCell, styled, IconButton } from '@mui/material';
 
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
-import IconButton from '@mui/material/IconButton';
 
-const styles = theme => ({
-  toggleCell: {
+const PREFIX = 'TableDetailToggleCell';
+export const classes = {
+  toggleCell: `${PREFIX}-toggleCell`,
+  toggleCellButton: `${PREFIX}-toggleCellButton`,
+};
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${classes.toggleCell}`]: {
     textAlign: 'center',
     textOverflow: 'initial',
     paddingTop: 0,
     paddingBottom: 0,
     paddingLeft: theme.spacing(1),
   },
-  toggleCellButton: {
-    verticalAlign: 'middle',
-    display: 'inline-block',
-    padding: theme.spacing(1),
-  },
-});
+}));
 
-const TableDetailToggleCellBase = ({
-  style, expanded, classes, onToggle,
+export const TableDetailToggleCell = ({
+  style, expanded, onToggle,
   tableColumn, tableRow, row,
   className, forwardedRef,
   ...restProps
@@ -34,36 +33,35 @@ const TableDetailToggleCellBase = ({
     onToggle();
   };
   return (
-    <TableCell
+    <StyledTableCell
       className={classNames(classes.toggleCell, className)}
       style={style}
       ref={forwardedRef}
       {...restProps}
     >
-      <IconButton className={classes.toggleCellButton} onClick={handleClick} size="large">
+      <IconButton onClick={handleClick}>
         {
           expanded
             ? <ExpandLess />
             : <ExpandMore />
         }
       </IconButton>
-    </TableCell>
+    </StyledTableCell>
   );
 };
 
-TableDetailToggleCellBase.propTypes = {
+TableDetailToggleCell.propTypes = {
   style: PropTypes.object,
   expanded: PropTypes.bool,
-  classes: PropTypes.object.isRequired,
   onToggle: PropTypes.func,
   className: PropTypes.string,
   tableColumn: PropTypes.object,
   tableRow: PropTypes.object,
   row: PropTypes.any,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
-TableDetailToggleCellBase.defaultProps = {
+TableDetailToggleCell.defaultProps = {
   style: null,
   expanded: false,
   onToggle: () => {},
@@ -73,5 +71,3 @@ TableDetailToggleCellBase.defaultProps = {
   row: undefined,
   forwardedRef: undefined,
 };
-
-export const TableDetailToggleCell = withStyles(styles, { name: 'TableDetailToggleCell' })(TableDetailToggleCellBase);

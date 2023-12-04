@@ -1,37 +1,39 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import ToolbarMUI from '@mui/material/Toolbar';
-import withStyles from '@mui/styles/withStyles';
+import { Toolbar as ToolbarMUI, styled } from '@mui/material';
 import { withKeyboardNavigation } from '@devexpress/dx-react-grid';
 import { getBorder } from '../utils';
 
-const styles = theme => ({
-  toolbar: {
+const PREFIX = 'Toolbar';
+export const classes = {
+  toolbar: `${PREFIX}-toolbar`,
+};
+const StyledToolbarMUI = styled(ToolbarMUI)(({ theme }) => ({
+  [`&.${classes.toolbar}`]: {
     borderBottom: getBorder(theme),
     flex: 'none',
   },
-});
+}));
 
 const ToolbarBase = ({
-  children, classes, className, style, forwardedRef, ...restProps
+  children, className, style, forwardedRef, ...restProps
 }) => (
-  <ToolbarMUI
+  <StyledToolbarMUI
     style={style}
     className={classNames(classes.toolbar, className)}
     ref={forwardedRef}
     {...restProps}
   >
     {children}
-  </ToolbarMUI>
+  </StyledToolbarMUI>
 );
 
 ToolbarBase.propTypes = {
   children: PropTypes.node.isRequired,
-  classes: PropTypes.object.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 ToolbarBase.defaultProps = {
@@ -40,4 +42,4 @@ ToolbarBase.defaultProps = {
   forwardedRef: undefined,
 };
 
-export const Toolbar = withKeyboardNavigation('toolbar', 'none')(withStyles(styles, { name: 'Toolbar' })(ToolbarBase));
+export const Toolbar = withKeyboardNavigation('toolbar', 'none')(ToolbarBase);

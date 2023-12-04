@@ -1,9 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const {
-  overrideFileIfChanged, getFileContents, writeObjectToFile,
-} = require('./fs-utils');
-const { getCurrentProductName } = require('./utils');
+import fs from 'fs';
+import path from 'path';
+
+import { getFileContents, writeObjectToFile } from './fs-utils.js';
+import { getCurrentProductName } from './utils.js';
 
 const THEME_SOURCES_FOLDER = './src/theme-sources';
 const DEMO_DATA_FOLDER = './src/demo-data';
@@ -16,13 +15,14 @@ const retrieveImportFiles = (imports, regex) => imports
   .filter(r => !!r)
   .map(r => r[1]);
 
-// const knownDeepImports = ['@mui/material', '@mui/icons-material', '@material-ui/styles'];
-const knownDeepImports = ['@mui/material', '@mui/icons-material', '@mui/styles'];
+const knownDeepImports = ['@mui/material', '@mui/icons-material'];
 const dependencies = {
   '"@mui/material"': ['"@mui/icons-material"'],
   '"@devexpress/dx-react-chart-material-ui"': [
     '"@devexpress/dx-react-chart"',
     '"@mui/icons-material"',
+    '"@emotion/react"',
+    '"@emotion/styled"',
   ],
   '"@devexpress/dx-react-chart-bootstrap4"': ['"@devexpress/dx-react-chart"'],
   '"@devexpress/dx-react-chart"': ['"@devexpress/dx-react-core"'],
@@ -34,11 +34,18 @@ const dependencies = {
   '"@devexpress/dx-react-grid-material-ui"': [
     '"@devexpress/dx-react-grid"',
     '"@mui/icons-material"',
+    '"@emotion/react"',
+    '"@emotion/styled"',
+    '"@mui/lab"',
   ],
   '"@devexpress/dx-react-grid"': ['"@devexpress/dx-react-core"'],
   '"@devexpress/dx-react-scheduler-material-ui"': [
     '"@devexpress/dx-react-scheduler"',
     '"@mui/icons-material"',
+    '"@emotion/react"',
+    '"@emotion/styled"',
+    '"@mui/x-date-pickers"',
+    '"@mui/lab"',
   ],
   '"@devexpress/dx-react-scheduler"': ['"@devexpress/dx-react-core"'],
 };
@@ -55,7 +62,7 @@ const getDepsRecursive = (name, deps = []) => {
   return deps;
 };
 
-const parseHelperFiles = (source) => {
+export const parseHelperFiles = (source) => {
   const imports = source.split('import');
   const themeComponents = quotify(retrieveImportFiles(
     imports, /'.+(theme-sources[^']+?[\w]+\/?[\w-]+)'/,
@@ -119,7 +126,7 @@ const generateDirRegistry = (dir) => {
   }, { deps: {}, files: {} });
 };
 
-const generateThemeFilesRegistry = (commonPath) => {
+export const generateThemeFilesRegistry = (commonPath) => {
   const helperRegistry = fs.readdirSync(THEME_SOURCES_FOLDER).reduce((themeAcc, themeName) => {
     const componentsPath = path.join(THEME_SOURCES_FOLDER, themeName, 'components');
 
@@ -145,11 +152,14 @@ const generateThemeFilesRegistry = (commonPath) => {
 };
 
 const parseDepsVersions = () => {
-  const deps = require(process.cwd() + '/package.json').dependencies;
+  const packageJsonPath = path.join(process.cwd(), 'package.json');
+  const pkg = fs.readFileSync(packageJsonPath).toString();
+  const { dependencies: deps } = JSON.parse(pkg);
+
   return JSON.stringify(deps);
 };
 
-const generateDataHelpersRegistry = (commonPath) => {
+export const generateDataHelpersRegistry = (commonPath) => {
   const registry = generateDirRegistry(path.normalize(DEMO_DATA_FOLDER));
   const depsVersions = parseDepsVersions();
   writeObjectToFile(
@@ -162,12 +172,4 @@ const generateDataHelpersRegistry = (commonPath) => {
     { [getCurrentProductName()]: { ...registry, depsVersions } },
     'demoData',
   );
-};
-
-module.exports = {
-  generateThemeFilesRegistry,
-  generateDataHelpersRegistry,
-  // generateHelperFilesRegistry: () => {
-  // },
-  parseHelperFiles,
 };

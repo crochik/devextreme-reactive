@@ -1,22 +1,27 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
-import Input from '@mui/material/Input';
-import InputAdornment from '@mui/material/InputAdornment';
+import PropTypes from 'prop-types';
+import { Input, InputAdornment, styled } from '@mui/material';
 import Search from '@mui/icons-material/Search';
 
-const styles = theme => ({
-  root: {
+const PREFIX = 'SearchPanelInput';
+
+export const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledInput = styled(Input)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     display: 'flex',
     alignItems: 'center',
     color: theme.palette.action.active,
   },
-});
+}));
 
-const SearchPanelInputBase = ({
+export const SearchPanelInput = ({
   onValueChange, value, getMessage, inputRef, ...restProps
 }) => (
-  <Input
+  <StyledInput
+    className={classes.root}
     ref={inputRef}
     onChange={e => onValueChange(e.target.value)}
     value={value}
@@ -31,15 +36,13 @@ const SearchPanelInputBase = ({
   />
 );
 
-SearchPanelInputBase.propTypes = {
+SearchPanelInput.propTypes = {
   onValueChange: PropTypes.func.isRequired,
   value: PropTypes.string,
   getMessage: PropTypes.func.isRequired,
   inputRef: PropTypes.object,
 };
-SearchPanelInputBase.defaultProps = {
+SearchPanelInput.defaultProps = {
   value: '',
   inputRef: undefined,
 };
-
-export const SearchPanelInput = withStyles(styles)(SearchPanelInputBase);

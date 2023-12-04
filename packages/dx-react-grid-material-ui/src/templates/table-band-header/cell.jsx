@@ -1,15 +1,19 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import TableCell from '@mui/material/TableCell';
-import withStyles from '@mui/styles/withStyles';
+import { TableCell, styled } from '@mui/material';
 import { getBorder } from '../utils';
 
-const styles = theme => ({
-  cell: {
+const PREFIX = 'Cell';
+export const classes = {
+  cell: `${PREFIX}-cell`,
+  beforeBorder: `${PREFIX}-beforeBorder`,
+};
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${classes.cell}`]: {
     paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
-    '&:first-child': {
+    '&:first-of-type': {
       paddingLeft: theme.spacing(3),
     },
     '&:last-child': {
@@ -22,16 +26,16 @@ const styles = theme => ({
     borderBottom: getBorder(theme),
     borderRight: getBorder(theme),
   },
-  beforeBorder: {
+  [`&.${classes.beforeBorder}`]: {
     borderLeft: getBorder(theme),
   },
-});
+}));
 
-const CellBase = ({
-  column, value, children, classes, tableRow, tableColumn, row, className, beforeBorder,
+export const Cell = ({
+  column, value, children, tableRow, tableColumn, row, className, beforeBorder,
   forwardedRef, ...restProps
 }) => (
-  <TableCell
+  <StyledTableCell
     className={classNames({
       [classes.cell]: true,
       [classes.beforeBorder]: beforeBorder,
@@ -40,23 +44,22 @@ const CellBase = ({
     ref={forwardedRef}
   >
     {children}
-  </TableCell>
+  </StyledTableCell>
 );
 
-CellBase.propTypes = {
+Cell.propTypes = {
   value: PropTypes.any,
   column: PropTypes.object,
   row: PropTypes.any,
-  classes: PropTypes.object.isRequired,
   children: PropTypes.node,
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   className: PropTypes.string,
   beforeBorder: PropTypes.bool,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
-CellBase.defaultProps = {
+Cell.defaultProps = {
   value: undefined,
   column: undefined,
   row: undefined,
@@ -67,5 +70,3 @@ CellBase.defaultProps = {
   beforeBorder: false,
   forwardedRef: undefined,
 };
-
-export const Cell = withStyles(styles, { name: 'Cell' })(CellBase);

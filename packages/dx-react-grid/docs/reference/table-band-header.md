@@ -27,6 +27,7 @@ import { TableBandHeader } from '@devexpress/dx-react-grid';
 - [TableEditColumn](table-edit-column.md) [Optional]
 - [TableSelection](table-selection.md) [Optional]
 - [TableColumnVisibility](table-column-visibility.md) [Optional]
+- [TableGroupRow](table-group-row.md) [Optional]
 
 ### Properties
 
@@ -72,7 +73,7 @@ Additional properties are added to the component's root element.
 
 Field | Type | Description
 ------|------|------------
-ROW_TYPE | symbol | The band row type's identifier.
+ROW&lowbar;TYPE | symbol | The band row type's identifier.
 
 ## Plugin Developer Reference
 

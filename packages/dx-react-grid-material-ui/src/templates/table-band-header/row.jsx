@@ -1,41 +1,43 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import withStyles from '@mui/styles/withStyles';
-import TableRow from '@mui/material/TableRow';
+import { styled, TableRow } from '@mui/material';
 
-const styles = {
-  row: {
+const PREFIX = 'Row';
+export const classes = {
+  row: `${PREFIX}-row`,
+};
+const StyledTableRow = styled(TableRow)(() => ({
+  [`&.${classes.row}`]: {
     height: 'auto',
   },
-};
+}));
 
-export const RowBase = ({
-  children, classes, className, row, tableRow, tableColumn, ...restProps
+export const Row = ({
+  children, className, row, tableRow, tableColumn, forwardedRef, ...restProps
 }) => (
-  <TableRow
+  <StyledTableRow
     className={classNames(classes.row, className)}
     {...restProps}
   >
     {children}
-  </TableRow>
+  </StyledTableRow>
 );
 
-RowBase.propTypes = {
-  classes: PropTypes.object.isRequired,
+Row.propTypes = {
   children: PropTypes.node,
   row: PropTypes.any,
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   className: PropTypes.string,
+  forwardedRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-RowBase.defaultProps = {
+Row.defaultProps = {
   children: undefined,
   row: undefined,
   tableRow: undefined,
   tableColumn: undefined,
   className: undefined,
+  forwardedRef: undefined,
 };
-
-export const Row = withStyles(styles, { name: 'Row' })(RowBase);

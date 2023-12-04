@@ -7,7 +7,6 @@ import {
   checkColumnWidths,
 } from '@devexpress/dx-grid-core';
 import { makeVirtualTable } from './virtual-table';
-import { Table } from '../table';
 import {
   pluginDepsToComponents, getComputedState, executeComputedAction,
 } from '@devexpress/dx-testing';
@@ -169,10 +168,32 @@ describe('#makeVirtualTable', () => {
         </PluginHost>,
       );
 
-      executeComputedAction(tree, actions => actions.scrollToColumn());
+      executeComputedAction(tree, actions => actions.scrollToColumn(3));
 
       expect(defaultDeps.action.scrollToColumn)
         .toHaveBeenCalled();
+      expect(tree.find(VirtualLayoutMock).props())
+      .toMatchObject({
+        nextColumnId: 3,
+      });
+    });
+
+    it('should update nextColumnId to undefined after update viewport', () => {
+      const tree = mount(
+        <PluginHost>
+          {pluginDepsToComponents(defaultDeps)}
+          <VirtualTable />
+        </PluginHost>,
+      );
+
+      executeComputedAction(tree, actions => actions.scrollToColumn(3));
+      tree.find(VirtualTable).setState({ viewport: 'viewport' });
+      tree.update();
+
+      expect(tree.find(VirtualLayoutMock).props())
+      .toMatchObject({
+        nextColumnId: undefined,
+      });
     });
   });
 
@@ -190,8 +211,6 @@ describe('#makeVirtualTable', () => {
         .toMatchObject({
           height: defaultVirtualTableProps.defaultHeight,
           estimatedRowHeight: defaultVirtualTableProps.defaultEstimatedRowHeight,
-          headTableComponent: defaultVirtualTableProps.FixedHeader,
-          footerTableComponent: defaultVirtualTableProps.FixedFooter,
           totalRowCount: defaultDeps.getter.availableRowCount,
           loadedRowsStart: defaultDeps.getter.loadedRowsStart,
         });
@@ -251,25 +270,6 @@ describe('#makeVirtualTable', () => {
 
   describe('inner plugins', () => {
     describe('Table', () => {
-      it('should pass layoutComponent to the Table', () => {
-        const defaultProps = {
-          footerTableComponent: () => null,
-          headTableComponent: () => null,
-        };
-        const VirtualTable = makeVirtualTable(Table, defaultVirtualTableProps);
-        const tree = mount((
-          <PluginHost>
-            {pluginDepsToComponents(defaultDeps)}
-            <VirtualTable
-              {...defaultProps}
-            />
-          </PluginHost>
-        ));
-
-        expect(tree.find(VirtualLayoutMock).props())
-          .toMatchObject(defaultProps);
-      });
-
       it('should pass rest props to a Table', () => {
         const columnExtensions = [{ name: 'a', width: 0 }];
         const VirtualTable = makeVirtualTable(TableMock, defaultVirtualTableProps);

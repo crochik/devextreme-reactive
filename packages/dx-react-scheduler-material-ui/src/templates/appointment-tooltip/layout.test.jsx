@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { createShallow, getClasses, createMount } from '@devexpress/dx-testing';
-import Popover from '@mui/material/Popover';
-import { Layout } from './layout';
+import { createShallow, createMount } from '@devexpress/dx-testing';
+import { Popover } from '@mui/material';
+import { Layout, classes } from './layout';
 
 describe('Appointment Tooltip', () => {
   let shallow;
-  let classes;
   let mount;
   const defaultProps = {
+    onDeleteButtonClick: jest.fn(),
     headerComponent: () => null,
     commandButtonComponent: () => null,
     contentComponent: () => null,
@@ -30,7 +30,6 @@ describe('Appointment Tooltip', () => {
     formatDate: jest.fn(),
   };
   beforeAll(() => {
-    classes = getClasses(<Layout {...defaultProps} />);
     shallow = createShallow({ dive: true });
   });
   beforeEach(() => {
@@ -123,13 +122,12 @@ describe('Appointment Tooltip', () => {
     });
 
     it('should handle onDeleteButtonClick', () => {
-      const onDeleteButtonClick = jest.fn();
       const tree = shallow((
-        <Layout onDeleteButtonClick={onDeleteButtonClick} {...defaultProps} />
+        <Layout {...defaultProps} />
       ));
 
       tree.find(defaultProps.headerComponent).prop('onDeleteButtonClick')();
-      expect(onDeleteButtonClick)
+      expect(defaultProps.onDeleteButtonClick)
         .toHaveBeenCalled();
     });
   });

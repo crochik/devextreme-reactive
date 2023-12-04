@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { StyleContext } from '../layout';
 
 export class Cell extends React.PureComponent {
@@ -44,7 +44,7 @@ Cell.propTypes = {
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   beforeBorder: PropTypes.bool,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 Cell.defaultProps = {

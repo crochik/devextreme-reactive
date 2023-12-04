@@ -5,6 +5,7 @@ import {
   getScrollTop,
   getTopRowId,
   getScrollLeft,
+  isColumnsWidthDifferent,
 } from './helpers';
 import { TOP_POSITION, BOTTOM_POSITION, LEFT_POSITION, RIGHT_POSITION } from './constants';
 
@@ -20,9 +21,10 @@ const createColumns = (length, width = 150) => (
 );
 
 describe('#getViewport', () => {
-  const getRowHeight = row => row.height;
-  const getColumnWidth = col => col.width;
+  const getRowHeight = row => row ? row.height : estimatedRowheight;
+  const getColumnWidth = col => col ? col.width : 150;
   const defaultState = {
+    skipItems: [0, 0],
     containerWidth: 800,
     containerHeight: 800,
     headerHeight: 100,
@@ -52,7 +54,7 @@ describe('#getViewport', () => {
 
   it('should calculate viewport for default-sized rows', () => {
     expect(getViewport(
-      defaultState, defaultGetters, estimatedRowheight, getRowHeight, getColumnWidth,
+      defaultState, defaultGetters, getRowHeight, getColumnWidth,
     ))
       .toEqual({
         top: 21000,
@@ -60,7 +62,7 @@ describe('#getViewport', () => {
         width: 800,
         height: 800,
         columns: [[9, 16]],
-        rows: [525, 539],
+        rows: [525, 544],
         headerRows: [0, 1],
         footerRows: [0, 1],
       });
@@ -84,7 +86,7 @@ describe('#getViewport', () => {
     };
 
     expect(getViewport(
-      state, getters, estimatedRowheight, getRowHeight, getColumnWidth,
+      state, getters, getRowHeight, getColumnWidth,
     ))
       .toEqual({
         top: 400,
@@ -92,9 +94,9 @@ describe('#getViewport', () => {
         width: 800,
         height: 800,
         columns: [[9, 16]],
-        rows: [8, 28],
+        rows: [8, 31],
         headerRows: [0, 2],
-        footerRows: [0, 0],
+        footerRows: [0, 2],
       });
   });
 
@@ -105,7 +107,7 @@ describe('#getViewport', () => {
     };
 
     expect(getViewport(
-      defaultState, getters, estimatedRowheight, getRowHeight, getColumnWidth,
+      defaultState, getters, getRowHeight, getColumnWidth,
     ))
       .toEqual({
         top: 21000,
@@ -126,7 +128,7 @@ describe('#getViewport', () => {
       width: 800,
       height: 800,
       columns: [[9, 16]],
-      rows: [525, 539],
+      rows: [525, 544],
       headerRows: [0, 1],
       footerRows: [0, 1],
     };
@@ -136,7 +138,7 @@ describe('#getViewport', () => {
     };
 
     expect(getViewport(
-      defaultState, getters, estimatedRowheight, getRowHeight, getColumnWidth,
+      defaultState, getters, getRowHeight, getColumnWidth,
     ))
       .toBe(initialViewport);
   });
@@ -272,5 +274,49 @@ describe('#getScrollLeft', () => {
 
   it('should return scroll left, columnId is RIGHT_POSITION', () => {
     expect(getScrollLeft(3, 10, RIGHT_POSITION)).toBe(30);
+  });
+});
+
+describe('#isColumnsWidthDifferent', () => {
+  it('should return false, columns reordering only', () => {
+    const prevColumns = [
+      { width: '20px', key: 'column1' },
+      { width: '10px', key: 'column2' },
+      { width: '5px', key: 'column3' },
+    ] as any;
+    const columns = [
+      { width: '10px', key: 'column2' },
+      { width: '20px', key: 'column1' },
+      { width: '5px', key: 'column3' },
+    ] as any;
+    expect(isColumnsWidthDifferent(prevColumns, columns)).toBeFalsy();
+  });
+
+  it('should return true, columns width changed', () => {
+    const prevColumns = [
+      { width: 20, key: 'column1' },
+      { width: 10, key: 'column2' },
+      { width: 5, key: 'column3' },
+    ] as any;
+    const columns = [
+      { width: 20, key: 'column1' },
+      { width: 20, key: 'column2' },
+      { width: 5, key: 'column3' },
+    ] as any;
+    expect(isColumnsWidthDifferent(prevColumns, columns)).toBeTruthy();
+  });
+
+  it('should return true, columns changed', () => {
+    const prevColumns = [
+      { width: 20, key: 'column1' },
+      { width: 10, key: 'column2' },
+      { width: 5, key: 'column3' },
+    ] as any;
+    const columns = [
+      { width: 20, key: 'column1' },
+      { width: 10, key: 'column2' },
+      { width: 5, key: 'column4' },
+    ] as any;
+    expect(isColumnsWidthDifferent(prevColumns, columns)).toBeTruthy();
   });
 });

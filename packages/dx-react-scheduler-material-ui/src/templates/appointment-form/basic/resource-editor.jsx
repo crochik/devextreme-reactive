@@ -1,46 +1,60 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import makeStyles from '@mui/styles/makeStyles';
-import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import {
+  styled, TextField, MenuItem, Chip,
+} from '@mui/material';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
 import { getAppointmentColor } from '../../utils';
 
-const getResourceInstance = (resourceInstances, id) => resourceInstances
-  .find(item => item.id === id);
+const PREFIX = 'ResourceEditor';
 
-const useStyles = makeStyles(({ spacing }) => ({
-  select: {
+const classes = {
+  select: `${PREFIX}-select`,
+  selectBox: `${PREFIX}-selectBox`,
+  chips: `${PREFIX}-chips`,
+  chip: `${PREFIX}-chip`,
+  resourceCircle: `${PREFIX}-resourceCircle`,
+  itemContainer: `${PREFIX}-itemContainer`,
+  circleContainer: `${PREFIX}-circleContainer`,
+};
+
+const StyledTextField = styled(TextField)(({ theme: { spacing } }) => ({
+  [`&.${classes.select}`]: {
     padding: spacing(1),
   },
-  selectBox: {
+  [`&.${classes.selectBox}`]: {
     minHeight: spacing(6.5),
     width: '100%',
   },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  chip: {
-    color: 'white',
-    margin: 2,
-  },
-  resourceCircle: {
+}));
+
+const StyledDiv = styled('div')(({ theme: { spacing } }) => ({
+  [`&.${classes.resourceCircle}`]: {
     height: spacing(2),
     width: spacing(2),
     borderRadius: '50%',
     marginRight: spacing(1),
   },
-  itemContainer: {
+  [`&.${classes.itemContainer}`]: {
     display: 'flex',
     padding: spacing(0.75),
   },
-  circleContainer: {
+  [`& .${classes.circleContainer}`]: {
     display: 'flex',
     alignItems: 'center',
   },
+  [`&.${classes.chips}`]: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  [`& .${classes.chip}`]: {
+    color: 'white',
+    margin: 2,
+  },
 }));
+
+const getResourceInstance = (resourceInstances, id) => resourceInstances
+  .find(item => item.id === id);
 
 export const ResourceEditor = React.memo(({
   readOnly,
@@ -50,8 +64,6 @@ export const ResourceEditor = React.memo(({
   className,
   ...restProps
 }) => {
-  const classes = useStyles();
-
   const values = appointmentResources.reduce((acc, resourceItem) => (
     resourceItem.fieldName === resource.fieldName
       ? [...acc, resourceItem.id]
@@ -63,7 +75,7 @@ export const ResourceEditor = React.memo(({
   };
 
   return (
-    <TextField
+    <StyledTextField
       select
       disabled={readOnly}
       variant="outlined"
@@ -73,7 +85,7 @@ export const ResourceEditor = React.memo(({
         multiple: resource.allowMultiple,
         renderValue: (selected = []) => (
           resource.allowMultiple ? (
-            <div className={classes.chips}>
+            <StyledDiv className={classes.chips}>
               {selected.map((value) => {
                 const resourceItem = getResourceInstance(resource.instances, value);
                 return (
@@ -85,11 +97,11 @@ export const ResourceEditor = React.memo(({
                   />
                 );
               })}
-            </div>
+            </StyledDiv>
           ) : (
-            <div className={classes.itemContainer}>
+            <StyledDiv className={classes.itemContainer}>
               <div className={classes.circleContainer}>
-                <div
+                <StyledDiv
                   className={classes.resourceCircle}
                   style={{
                     backgroundColor: getAppointmentColor(
@@ -99,7 +111,7 @@ export const ResourceEditor = React.memo(({
                 />
               </div>
               {getResourceInstance(resource.instances, selected[0]).text}
-            </div>
+            </StyledDiv>
           )
         ),
       }}
@@ -111,7 +123,7 @@ export const ResourceEditor = React.memo(({
       {
         resource.instances.map(resourceItem => (
           <MenuItem key={resourceItem.id} value={resourceItem.id}>
-            <div
+            <StyledDiv
               className={classes.resourceCircle}
               style={{ backgroundColor: getAppointmentColor(400, resourceItem.color) }}
             />
@@ -119,7 +131,7 @@ export const ResourceEditor = React.memo(({
           </MenuItem>
         ))
       }
-    </TextField>
+    </StyledTextField>
   );
 });
 

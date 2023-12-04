@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
 import { withKeyboardNavigation } from '@devexpress/dx-react-grid';
 import { PageSizeSelector } from './page-size-selector';
@@ -58,7 +58,7 @@ PagerBase.propTypes = {
   getMessage: PropTypes.func.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 PagerBase.defaultProps = {

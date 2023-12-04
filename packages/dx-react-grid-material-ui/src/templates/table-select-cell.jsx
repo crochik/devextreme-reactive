@@ -1,31 +1,35 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import Checkbox from '@mui/material/Checkbox';
-import TableCell from '@mui/material/TableCell';
-import withStyles from '@mui/styles/withStyles';
+import { Checkbox, TableCell, styled } from '@mui/material';
 
-const styles = theme => ({
-  cell: {
+const PREFIX = 'TableSelectCell';
+export const classes = {
+  cell: `${PREFIX}-cell`,
+  checkbox: `${PREFIX}-checkbox`,
+};
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${classes.cell}`]: {
     overflow: 'visible',
     paddingRight: 0,
     paddingLeft: theme.spacing(1),
     textAlign: 'center',
   },
-  checkbox: {
+  [`& .${classes.checkbox}`]: {
     marginTop: '-1px',
     marginBottom: '-1px',
     padding: theme.spacing(1),
   },
-});
+}));
 
-export const TableSelectCellBase = ({
-  style, selected, onToggle, classes,
+export const TableSelectCell = ({
+  style, selected, onToggle,
   className, row, tableRow, tableColumn,
   forwardedRef,
   ...restProps
 }) => (
-  <TableCell
+  <StyledTableCell
     padding="checkbox"
     style={style}
     ref={forwardedRef}
@@ -40,22 +44,21 @@ export const TableSelectCellBase = ({
         onToggle();
       }}
     />
-  </TableCell>
+  </StyledTableCell>
 );
 
-TableSelectCellBase.propTypes = {
+TableSelectCell.propTypes = {
   style: PropTypes.object,
   selected: PropTypes.bool,
   onToggle: PropTypes.func,
-  classes: PropTypes.object.isRequired,
   row: PropTypes.any,
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   className: PropTypes.string,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
-TableSelectCellBase.defaultProps = {
+TableSelectCell.defaultProps = {
   style: null,
   selected: false,
   onToggle: () => {},
@@ -65,5 +68,3 @@ TableSelectCellBase.defaultProps = {
   className: undefined,
   forwardedRef: undefined,
 };
-
-export const TableSelectCell = withStyles(styles, { name: 'TableSelectCell' })(TableSelectCellBase);

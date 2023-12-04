@@ -1,13 +1,14 @@
 {
   "private": true,
   "name": "@devexpress/dx-demo-shell",
-  "version": "3.0.0-beta.1",
+  "version": "4.0.6",
   "description": "DevExtreme Reactive Components Demo Shell",
   "author": {
     "name": "Developer Express Inc.",
     "url": "https://www.devexpress.com/"
   },
   "license": "SEE LICENSE IN README.md",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "styles": "dist/index.css",

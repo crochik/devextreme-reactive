@@ -1,28 +1,32 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import TableCell from '@mui/material/TableCell';
-import withStyles from '@mui/styles/withStyles';
+import { TableCell, styled } from '@mui/material';
 import { getBorder } from './utils';
 
-const styles = theme => ({
-  cell: {
+const PREFIX = 'TableStubCell';
+export const classes = {
+  cell: `${PREFIX}-cell`,
+  footer: `${PREFIX}-footer`,
+};
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${classes.cell}`]: {
     padding: 0,
   },
-  footer: {
-    borderBottom: getBorder(theme),
+  [`&.${classes.footer}`]: {
+    borderTop: getBorder(theme),
   },
-});
+}));
 
-const TableStubCellBase = ({
-  classes,
+export const TableStubCell = ({
   className,
   tableRow,
   tableColumn,
   forwardedRef,
   ...restProps
 }) => (
-  <TableCell
+  <StyledTableCell
     ref={forwardedRef}
     className={classNames(classes.cell, className)}
     classes={{ footer: classes.footer }}
@@ -30,19 +34,16 @@ const TableStubCellBase = ({
   />
 );
 
-TableStubCellBase.propTypes = {
-  classes: PropTypes.object.isRequired,
+TableStubCell.propTypes = {
   className: PropTypes.string,
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   forwardedRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
-TableStubCellBase.defaultProps = {
+TableStubCell.defaultProps = {
   className: undefined,
   tableRow: undefined,
   tableColumn: undefined,
   forwardedRef: undefined,
 };
-
-export const TableStubCell = withStyles(styles, { name: 'TableStubCell' })(TableStubCellBase);

@@ -1,22 +1,27 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import Popover from '@mui/material/Popover';
-import withStyles from '@mui/styles/withStyles';
+import { styled, Popover } from '@mui/material';
+import PropTypes from 'prop-types';
 import { SMALL_LAYOUT_MEDIA_QUERY } from '../constants';
 
-const verticalTopHorizontalCenterOptions = { vertical: 'top', horizontal: 'center' };
+const PREFIX = 'Layout';
 
-const styles = {
-  popover: {
+export const classes = {
+  popover: `${PREFIX}-popover`,
+};
+
+const StyledPopover = styled(Popover)({
+  [`& .${classes.popover}`]: {
     borderRadius: '8px',
     width: '400px',
     [`${SMALL_LAYOUT_MEDIA_QUERY}`]: {
       width: '300px',
     },
   },
-};
+});
 
-const LayoutBase = ({
+const verticalTopHorizontalCenterOptions = { vertical: 'top', horizontal: 'center' };
+
+export const Layout = ({
   headerComponent: Header,
   contentComponent: Content,
   commandButtonComponent,
@@ -31,13 +36,12 @@ const LayoutBase = ({
   onOpenButtonClick,
   onDeleteButtonClick,
   formatDate,
-  classes,
   ...restProps
 }) => {
   const { target, data = {} } = appointmentMeta;
 
   return (
-    <Popover
+    <StyledPopover
       open={visible}
       anchorEl={target}
       onClose={onHide}
@@ -65,11 +69,11 @@ const LayoutBase = ({
         formatDate={formatDate}
         recurringIconComponent={recurringIconComponent}
       />
-    </Popover>
+    </StyledPopover>
   );
 };
 
-LayoutBase.propTypes = {
+Layout.propTypes = {
   // oneOfType is a workaround because withStyles returns react object
   commandButtonComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   headerComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
@@ -79,10 +83,9 @@ LayoutBase.propTypes = {
   showCloseButton: PropTypes.bool.isRequired,
   showDeleteButton: PropTypes.bool.isRequired,
   commandButtonIds: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
   formatDate: PropTypes.func.isRequired,
   onOpenButtonClick: PropTypes.func,
-  onDeleteButtonClick: PropTypes.func,
+  onDeleteButtonClick: PropTypes.func.isRequired,
   appointmentMeta: PropTypes.shape({
     target: PropTypes.oneOfType([
       PropTypes.object,
@@ -94,13 +97,10 @@ LayoutBase.propTypes = {
   visible: PropTypes.bool,
   onHide: PropTypes.func,
 };
-LayoutBase.defaultProps = {
+Layout.defaultProps = {
   onOpenButtonClick: () => undefined,
-  onDeleteButtonClick: () => undefined,
   onHide: () => undefined,
   appointmentMeta: {},
   appointmentResources: [],
   visible: false,
 };
-
-export const Layout = withStyles(styles, { name: 'Layout' })(LayoutBase);

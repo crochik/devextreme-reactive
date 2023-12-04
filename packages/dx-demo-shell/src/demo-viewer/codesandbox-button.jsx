@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { getParameters } from 'codesandbox/lib/api/define';
 import './codesandbox-button.css';
 
@@ -34,7 +34,7 @@ export const CodeSandBoxButton = ({
       'package.json': {
         content: {
           dependencies: {
-            'react-dom': 'latest',
+            'react-dom': '^17.0.2',
             ...externalDeps,
           },
           ...devDeps,

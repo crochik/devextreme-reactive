@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
 
 export const TableTreeCell = ({
@@ -32,7 +32,7 @@ TableTreeCell.propTypes = {
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   style: PropTypes.object,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 TableTreeCell.defaultProps = {

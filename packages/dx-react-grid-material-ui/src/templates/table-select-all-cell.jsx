@@ -1,31 +1,37 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import Checkbox from '@mui/material/Checkbox';
-import TableCell from '@mui/material/TableCell';
-import withStyles from '@mui/styles/withStyles';
+import { Checkbox, TableCell, styled } from '@mui/material';
 
-const styles = theme => ({
-  cell: {
+const PREFIX = 'TableSelectAllCell';
+export const classes = {
+  cell: `${PREFIX}-cell`,
+  checkbox: `${PREFIX}-checkbox`,
+  alignWithRowSpan: `${PREFIX}-alignWithRowSpan`,
+  pointer: `${PREFIX}-pointer`,
+};
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${classes.cell}`]: {
     overflow: 'visible',
     paddingRight: 0,
     paddingLeft: theme.spacing(1),
     textAlign: 'center',
   },
-  checkbox: {
-    padding: theme.spacing(1),
+  [`&.${classes.pointer}`]: {
+    cursor: 'pointer',
   },
-  alignWithRowSpan: {
+  [`&.${classes.alignWithRowSpan}`]: {
     verticalAlign: 'bottom',
     paddingBottom: theme.spacing(0.5),
   },
-  pointer: {
-    cursor: 'pointer',
+  [`& .${classes.checkbox}`]: {
+    padding: theme.spacing(1),
   },
-});
+}));
 
-const TableSelectAllCellBase = ({
-  allSelected, someSelected, disabled, onToggle, classes,
+export const TableSelectAllCell = ({
+  allSelected, someSelected, disabled, onToggle,
   className, tableRow, tableColumn, rowSpan,
   forwardedRef,
   ...restProps
@@ -37,7 +43,7 @@ const TableSelectAllCellBase = ({
   }, className);
 
   return (
-    <TableCell
+    <StyledTableCell
       padding="checkbox"
       className={cellClasses}
       rowSpan={rowSpan}
@@ -56,24 +62,23 @@ const TableSelectAllCellBase = ({
           onToggle();
         }}
       />
-    </TableCell>
+    </StyledTableCell>
   );
 };
 
-TableSelectAllCellBase.propTypes = {
+TableSelectAllCell.propTypes = {
   allSelected: PropTypes.bool,
   someSelected: PropTypes.bool,
   disabled: PropTypes.bool,
   onToggle: PropTypes.func,
-  classes: PropTypes.object.isRequired,
   className: PropTypes.string,
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   rowSpan: PropTypes.number,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
-TableSelectAllCellBase.defaultProps = {
+TableSelectAllCell.defaultProps = {
   allSelected: false,
   someSelected: false,
   disabled: false,
@@ -84,5 +89,3 @@ TableSelectAllCellBase.defaultProps = {
   rowSpan: undefined,
   forwardedRef: undefined,
 };
-
-export const TableSelectAllCell = withStyles(styles, { name: 'TableSelectAllCell' })(TableSelectAllCellBase);

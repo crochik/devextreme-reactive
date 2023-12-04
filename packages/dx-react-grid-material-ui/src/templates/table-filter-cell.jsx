@@ -1,46 +1,48 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
-import TableCell from '@mui/material/TableCell';
-import withStyles from '@mui/styles/withStyles';
+import { TableCell, styled } from '@mui/material';
 
-const styles = ({ spacing }) => ({
-  cell: {
+const PREFIX = 'TableFilterCell';
+export const classes = {
+  cell: `${PREFIX}-cell`,
+  flexContainer: `${PREFIX}-flexContainer`,
+};
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${classes.cell}`]: {
     padding: 0,
-    '&:first-child': {
-      paddingLeft: spacing(3),
+    '&:first-of-type': {
+      paddingLeft: theme.spacing(3),
     },
   },
-  flexContainer: {
+  [`& .${classes.flexContainer}`]: {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
   },
-});
+}));
 
-const TableFilterCellBase = ({
+export const TableFilterCell = ({
   filter, getMessage, onFilter,
-  classes, children, className,
+  children, className,
   tableRow, tableColumn, column, filteringEnabled, forwardedRef,
   ...restProps
 }) => (
-  <TableCell
-    className={classNames({
-      [classes.cell]: true,
-    }, className)}
+  <StyledTableCell
+    className={classNames(classes.cell, className)}
     ref={forwardedRef}
     {...restProps}
   >
     <div className={classes.flexContainer}>
       {children}
     </div>
-  </TableCell>
+  </StyledTableCell>
 );
 
-TableFilterCellBase.propTypes = {
+TableFilterCell.propTypes = {
   filter: PropTypes.object,
   onFilter: PropTypes.func,
-  classes: PropTypes.object.isRequired,
   children: PropTypes.node,
   getMessage: PropTypes.func.isRequired,
   className: PropTypes.string,
@@ -48,10 +50,10 @@ TableFilterCellBase.propTypes = {
   tableColumn: PropTypes.object,
   column: PropTypes.object,
   filteringEnabled: PropTypes.bool,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
-TableFilterCellBase.defaultProps = {
+TableFilterCell.defaultProps = {
   filter: null,
   onFilter: () => {},
   children: undefined,
@@ -62,5 +64,3 @@ TableFilterCellBase.defaultProps = {
   filteringEnabled: true,
   forwardedRef: undefined,
 };
-
-export const TableFilterCell = withStyles(styles, { name: 'TableFilterCell' })(TableFilterCellBase);

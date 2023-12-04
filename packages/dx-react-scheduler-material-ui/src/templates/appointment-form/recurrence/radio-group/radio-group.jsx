@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   END_REPEAT_RADIO_GROUP,
   MONTHLY_RADIO_GROUP,
@@ -78,8 +78,8 @@ RadioGroup.propTypes = {
   type: PropTypes.string.isRequired,
   appointmentData: PropTypes.shape({
     title: PropTypes.string,
-    startDate: PropTypes.instanceOf(Date),
-    endDate: PropTypes.instanceOf(Date),
+    startDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+    endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     rRule: PropTypes.string,
     notes: PropTypes.string,
     additionalInformation: PropTypes.string,

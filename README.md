@@ -1,4 +1,4 @@
-# DevExtreme Reactive &middot; [![CircleCI](https://img.shields.io/circleci/project/github/DevExpress/devextreme-reactive/master.svg)](https://circleci.com/gh/DevExpress/devextreme-reactive) [![NPM](https://img.shields.io/npm/v/@devexpress/dx-core.svg)](https://www.npmjs.com/package/@devexpress/dx-core)
+# DevExtreme Reactive &middot; [![Build](https://github.com/DevExpress/devextreme-reactive/actions/workflows/ci_tests.yml/badge.svg)](https://github.com/DevExpress/devextreme-reactive/actions/workflows/ci_tests.yml) [![NPM](https://img.shields.io/npm/v/@devexpress/dx-core.svg)](https://www.npmjs.com/package/@devexpress/dx-core)
 
 DevExtreme Reactive is a set of business React components that deeply integrate with Bootstrap and Material-UI libraries.
 
@@ -31,4 +31,5 @@ DevExtreme Reactive is a set of business React components that deeply integrate 
 
 ## Support & Feedback
 
-Use [GitHub Issues](https://github.com/DevExpress/devextreme-reactive/issues) for reporting bugs, questions, and feature requests. If you own an active DevExtreme license, you can contact us at the [Support Center](https://www.devexpress.com/ask).
+- [Bugs and Feature Requests](https://github.com/DevExpress/devextreme-reactive/blob/master/CONTRIBUTING.md#bugs-and-feature-requests) 
+- [Help and Support](https://github.com/DevExpress/devextreme-reactive/blob/master/CONTRIBUTING.md#help-and-support)

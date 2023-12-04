@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { StyleContext } from '../layout';
 
 export const IndentCell = ({
@@ -36,7 +36,7 @@ IndentCell.propTypes = {
   style: PropTypes.object,
   side: PropTypes.string,
   position: PropTypes.number,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 IndentCell.defaultProps = {

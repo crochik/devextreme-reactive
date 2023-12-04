@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
 
 export const EditCell = ({
@@ -60,7 +60,7 @@ EditCell.propTypes = {
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 EditCell.defaultProps = {
   column: undefined,

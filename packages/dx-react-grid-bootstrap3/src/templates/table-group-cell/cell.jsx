@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const Cell = ({
   row, column,
@@ -39,7 +39,7 @@ Cell.propTypes = {
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   style: PropTypes.object,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 Cell.defaultProps = {

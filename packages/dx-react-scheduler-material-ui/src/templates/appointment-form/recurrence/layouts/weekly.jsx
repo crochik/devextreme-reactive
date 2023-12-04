@@ -1,20 +1,25 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import withStyles from '@mui/styles/withStyles';
+import { styled } from '@mui/material';
+import PropTypes from 'prop-types';
 import { getRecurrenceOptions, changeRecurrenceOptions, checkIsNaturalNumber } from '@devexpress/dx-scheduler-core';
 import { IntervalEditor } from './interval-editor';
 
-const styles = theme => ({
-  container: {
+const PREFIX = 'Weekly';
+
+export const classes = {
+  container: `${PREFIX}-container`,
+};
+
+const StyledDiv = styled('div')(({ theme }) => ({
+  [`& .${classes.container}`]: {
     marginBottom: theme.spacing(2),
   },
-});
+}));
 
-const WeeklyBase = ({
+export const Weekly = ({
   radioGroupComponent,
   textEditorComponent,
   labelComponent,
-  classes,
   getMessage,
   readOnly,
   onFieldChange,
@@ -34,7 +39,7 @@ const WeeklyBase = ({
     }), [recurrenceOptions, onFieldChange],
   );
   return (
-    <div
+    <StyledDiv
       {...restProps}
     >
       <IntervalEditor
@@ -55,11 +60,11 @@ const WeeklyBase = ({
         formatDate={formatDate}
         firstDayOfWeek={firstDayOfWeek}
       />
-    </div>
+    </StyledDiv>
   );
 };
 
-WeeklyBase.propTypes = {
+Weekly.propTypes = {
   labelComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   radioGroupComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   textEditorComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
@@ -69,24 +74,21 @@ WeeklyBase.propTypes = {
   ]).isRequired,
   appointmentData: PropTypes.shape({
     title: PropTypes.string,
-    startDate: PropTypes.instanceOf(Date),
-    endDate: PropTypes.instanceOf(Date),
+    startDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+    endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     rRule: PropTypes.string,
     notes: PropTypes.string,
     additionalInformation: PropTypes.string,
     allDay: PropTypes.bool,
   }).isRequired,
   onFieldChange: PropTypes.func,
-  classes: PropTypes.object.isRequired,
   getMessage: PropTypes.func.isRequired,
   readOnly: PropTypes.bool,
   formatDate: PropTypes.func.isRequired,
   firstDayOfWeek: PropTypes.number.isRequired,
 };
 
-WeeklyBase.defaultProps = {
+Weekly.defaultProps = {
   onFieldChange: () => undefined,
   readOnly: false,
 };
-
-export const Weekly = withStyles(styles)(WeeklyBase, { name: 'Weekly' });

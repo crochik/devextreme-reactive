@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Popper } from 'react-popper';
 
 const DefaultArrowComponent = React.forwardRef(({ placement, ...restProps }, ref) => (
@@ -77,11 +77,24 @@ export class Popover extends React.PureComponent {
   renderPopper() {
     const {
       children, target, renderInBody,
-      arrowComponent: ArrowComponent, ...restProps
+      arrowComponent: ArrowComponent, modifiers = [],
+      ...restProps
     } = this.props;
+
+    const popperModifiers = [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 8],
+        },
+      },
+      ...modifiers,
+    ];
+
     return (
       <Popper
         referenceElement={target}
+        modifiers={popperModifiers}
         {...restProps}
       >
         {({

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'clsx';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const TableDetailCell = ({
   colSpan,
@@ -27,7 +27,7 @@ TableDetailCell.propTypes = {
   tableColumn: PropTypes.object,
   tableRow: PropTypes.object,
   row: PropTypes.any,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 TableDetailCell.defaultProps = {

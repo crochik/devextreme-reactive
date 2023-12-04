@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import IconButton from '@mui/material/IconButton';
+import PropTypes from 'prop-types';
+import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';

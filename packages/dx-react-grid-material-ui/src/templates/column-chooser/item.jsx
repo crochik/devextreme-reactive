@@ -1,26 +1,30 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import withStyles from '@mui/styles/withStyles';
+import PropTypes from 'prop-types';
+import {
+  ListItem, ListItemText, Checkbox, styled,
+} from '@mui/material';
 
-const styles = theme => ({
-  checkbox: {
-    padding: 0,
-  },
-  itemText: {
+const PREFIX = 'Item';
+export const classes = {
+  checkbox: `${PREFIX}-checkbox`,
+  itemText: `${PREFIX}-itemText`,
+};
+
+const StyledListItem = styled(ListItem)(({ theme }) => ({
+  [`& .${classes.itemText}`]: {
     paddingLeft: theme.spacing(1),
   },
-});
+  [`& .${classes.checkbox}`]: {
+    padding: 0,
+  },
+}));
 
-const ItemBase = ({
+export const Item = ({
   item: { column, hidden },
   disabled, onToggle,
-  classes,
   ...restProps
 }) => (
-  <ListItem
+  <StyledListItem
     key={column.name}
     button={!disabled}
     component="li"
@@ -36,10 +40,10 @@ const ItemBase = ({
       className={classes.checkbox}
     />
     <ListItemText className={classes.itemText} primary={column.title || column.name} />
-  </ListItem>
+  </StyledListItem>
 );
 
-ItemBase.propTypes = {
+Item.propTypes = {
   item: PropTypes.shape({
     column: PropTypes.shape({
       name: PropTypes.string,
@@ -49,12 +53,9 @@ ItemBase.propTypes = {
   }).isRequired,
   disabled: PropTypes.bool,
   onToggle: PropTypes.func,
-  classes: PropTypes.object.isRequired,
 };
 
-ItemBase.defaultProps = {
+Item.defaultProps = {
   onToggle: () => { },
   disabled: false,
 };
-
-export const Item = withStyles(styles, { name: 'Item' })(ItemBase);

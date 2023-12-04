@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const ProgressBarCell = ({
   value, style, tabIndex, forwardedRef, className,
@@ -39,7 +39,7 @@ ProgressBarCell.propTypes = {
   value: PropTypes.number.isRequired,
   style: PropTypes.object,
   tabIndex: PropTypes.number,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
   className: PropTypes.string,
 };
 ProgressBarCell.defaultProps = {

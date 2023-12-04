@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import IconButton from '@mui/material/IconButton';
+import PropTypes from 'prop-types';
+import { IconButton } from '@mui/material';
 
 export const ToggleButton = ({
   buttonRef, onToggle, disabled, children, ...restProps

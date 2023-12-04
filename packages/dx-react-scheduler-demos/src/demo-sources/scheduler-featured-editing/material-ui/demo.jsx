@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-unused-state */
 import * as React from 'react';
+import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { ViewState, EditingState } from '@devexpress/dx-react-scheduler';
 import {
@@ -17,10 +18,9 @@ import {
   AllDayPanel,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { connectProps } from '@devexpress/dx-react-core';
-import DateTimePicker from '@mui/lab/DateTimePicker';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterMoment from '@mui/lab/AdapterMoment';
-import withStyles from '@mui/styles/withStyles';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -39,52 +39,69 @@ import Create from '@mui/icons-material/Create';
 
 import { appointments } from '../../../demo-data/appointments';
 
-const containerStyles = theme => ({
-  container: {
-    width: theme.spacing(68),
-    padding: 0,
-    paddingBottom: theme.spacing(2),
+const PREFIX = 'Demo';
+// #FOLD_BLOCK
+const classes = {
+  content: `${PREFIX}-content`,
+  header: `${PREFIX}-header`,
+  closeButton: `${PREFIX}-closeButton`,
+  buttonGroup: `${PREFIX}-buttonGroup`,
+  button: `${PREFIX}-button`,
+  picker: `${PREFIX}-picker`,
+  wrapper: `${PREFIX}-wrapper`,
+  icon: `${PREFIX}-icon`,
+  textField: `${PREFIX}-textField`,
+  addButton: `${PREFIX}-addButton`,
+};
+
+// #FOLD_BLOCK
+const StyledDiv = styled('div')(({ theme }) => ({
+  [`& .${classes.icon}`]: {
+    margin: theme.spacing(2, 0),
+    marginRight: theme.spacing(2),
   },
-  content: {
-    padding: theme.spacing(2),
-    paddingTop: 0,
-  },
-  header: {
+  [`& .${classes.header}`]: {
     overflow: 'hidden',
     paddingTop: theme.spacing(0.5),
   },
-  closeButton: {
+  [`& .${classes.textField}`]: {
+    width: '100%',
+  },
+  [`& .${classes.content}`]: {
+    padding: theme.spacing(2),
+    paddingTop: 0,
+  },
+  [`& .${classes.closeButton}`]: {
     float: 'right',
   },
-  buttonGroup: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 2),
-  },
-  button: {
-    marginLeft: theme.spacing(2),
-  },
-  picker: {
+  [`& .${classes.picker}`]: {
     marginRight: theme.spacing(2),
     '&:last-child': {
       marginRight: 0,
     },
     width: '50%',
   },
-  wrapper: {
+  [`& .${classes.wrapper}`]: {
     display: 'flex',
     justifyContent: 'space-between',
     padding: theme.spacing(1, 0),
   },
-  icon: {
-    margin: theme.spacing(2, 0),
-    marginRight: theme.spacing(2),
+  [`& .${classes.buttonGroup}`]: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 2),
   },
-  textField: {
-    width: '100%',
+  [`& .${classes.button}`]: {
+    marginLeft: theme.spacing(2),
   },
-});
-
+}));
+const StyledFab = styled(Fab)(({ theme }) => ({
+  [`&.${classes.addButton}`]: {
+    position: 'absolute',
+    bottom: theme.spacing(3),
+    right: theme.spacing(4),
+  },
+}));
 class AppointmentFormContainerBasic extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -136,7 +153,6 @@ class AppointmentFormContainerBasic extends React.PureComponent {
 
   render() {
     const {
-      classes,
       visible,
       visibleChange,
       appointmentData,
@@ -193,7 +209,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
         fullSize
         onHide={onHide}
       >
-        <div>
+        <StyledDiv>
           <div className={classes.header}>
             <IconButton className={classes.closeButton} onClick={cancelChanges} size="large">
               <Close color="action" />
@@ -211,12 +227,16 @@ class AppointmentFormContainerBasic extends React.PureComponent {
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <DateTimePicker
                   label="Start Date"
-                  renderInput={props => <TextField className={classes.picker} {...props} />}
+                  renderInput={
+                    props => <TextField className={classes.picker} {...props} />
+                  }
                   {...startDatePickerProps}
                 />
                 <DateTimePicker
                   label="End Date"
-                  renderInput={props => <TextField className={classes.picker} {...props} />}
+                  renderInput={
+                    props => <TextField className={classes.picker} {...props} />
+                  }
                   {...endDatePickerProps}
                 />
               </LocalizationProvider>
@@ -262,24 +282,14 @@ class AppointmentFormContainerBasic extends React.PureComponent {
               {isNewAppointment ? 'Create' : 'Save'}
             </Button>
           </div>
-        </div>
+        </StyledDiv>
       </AppointmentForm.Overlay>
     );
   }
 }
 
-const AppointmentFormContainer = withStyles(containerStyles, { name: 'AppointmentFormContainer' })(AppointmentFormContainerBasic);
-
-const styles = theme => ({
-  addButton: {
-    position: 'absolute',
-    bottom: theme.spacing(3),
-    right: theme.spacing(4),
-  },
-});
-
 /* eslint-disable-next-line react/no-multi-comp */
-class Demo extends React.PureComponent {
+export default class Demo extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -303,7 +313,7 @@ class Demo extends React.PureComponent {
     this.commitChanges = this.commitChanges.bind(this);
     this.onEditingAppointmentChange = this.onEditingAppointmentChange.bind(this);
     this.onAddedAppointmentChange = this.onAddedAppointmentChange.bind(this);
-    this.appointmentForm = connectProps(AppointmentFormContainer, () => {
+    this.appointmentForm = connectProps(AppointmentFormContainerBasic, () => {
       const {
         editingFormVisible,
         editingAppointment,
@@ -409,7 +419,6 @@ class Demo extends React.PureComponent {
       startDayHour,
       endDayHour,
     } = this.state;
-    const { classes } = this.props;
 
     return (
       <Paper>
@@ -470,7 +479,7 @@ class Demo extends React.PureComponent {
           </DialogActions>
         </Dialog>
 
-        <Fab
+        <StyledFab
           color="secondary"
           className={classes.addButton}
           onClick={() => {
@@ -483,10 +492,8 @@ class Demo extends React.PureComponent {
           }}
         >
           <AddIcon />
-        </Fab>
+        </StyledFab>
       </Paper>
     );
   }
 }
-
-export default withStyles(styles, { name: 'EditingDemo' })(Demo);

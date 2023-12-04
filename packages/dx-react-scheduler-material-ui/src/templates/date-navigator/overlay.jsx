@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import Popover from '@mui/material/Popover';
+import PropTypes from 'prop-types';
+import { Popover } from '@mui/material';
 
 const origin = { vertical: 'top', horizontal: 'right' };
 

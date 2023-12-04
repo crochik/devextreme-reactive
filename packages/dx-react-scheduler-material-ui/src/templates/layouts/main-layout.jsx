@@ -1,60 +1,85 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import makeStyles from '@mui/styles/makeStyles';
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material';
 import classNames from 'clsx';
-import { scrollingStrategy, getBorder, getBrightBorder } from '../utils';
+import {
+  scrollingStrategy,
+  getBorder,
+  getBrightBorder,
+  getEmptyCellWidth,
+} from '../utils';
 import { GROUPING_PANEL_VERTICAL_CELL_WIDTH, LEFT_PANEL_WIDTH_SPACING } from '../constants';
 
-const useStyles = makeStyles(theme => ({
-  container: {
+const PREFIX = 'MainLayout';
+
+export const classes = {
+  container: `${PREFIX}-container`,
+  stickyElement: `${PREFIX}-stickyElement`,
+  header: `${PREFIX}-header`,
+  leftPanel: `${PREFIX}-leftPanel`,
+  ordinaryLeftPanelBorder: `${PREFIX}-ordinaryLeftPanelBorder`,
+  brightLeftPanelBorder: `${PREFIX}-brightLeftPanelBorder`,
+  ordinaryHeaderBorder: `${PREFIX}-ordinaryHeaderBorder`,
+  brightHeaderBorder: `${PREFIX}-brightHeaderBorder`,
+  dayScaleEmptyCell: `${PREFIX}-dayScaleEmptyCell`,
+  flexRow: `${PREFIX}-flexRow`,
+  relativeContainer: `${PREFIX}-relativeContainer`,
+  inlineFlex: `${PREFIX}-inlineFlex`,
+  background: `${PREFIX}-background`,
+};
+
+const StyledDiv = styled('div', {
+  shouldForwardProp: prop => prop !== 'leftPanelWidth' && prop !== 'calculatedLeftPanelWidth',
+})(({ theme, leftPanelWidth, calculatedLeftPanelWidth }) => ({
+  [`&.${classes.container}`]: {
     overflowY: 'auto',
     position: 'relative',
     tableLayout: 'fixed',
   },
-  stickyElement: {
+  [`& .${classes.stickyElement}`]: {
     tableLayout: 'fixed',
     position: 'sticky',
     overflow: 'visible',
     background: theme.palette.background.paper,
   },
-  header: {
+  [`& .${classes.header}`]: {
     top: 0,
     zIndex: 2,
   },
-  leftPanel: {
+  [`& .${classes.leftPanel}`]: {
     left: 0,
     zIndex: 1,
     boxSizing: 'border-box',
   },
-  ordinaryLeftPanelBorder: {
+  [`& .${classes.ordinaryLeftPanelBorder}`]: {
     borderRight: getBorder(theme),
   },
-  brightLeftPanelBorder: {
+  [`& .${classes.brightLeftPanelBorder}`]: {
     borderRight: getBrightBorder(theme),
   },
-  ordinaryHeaderBorder: {
+  [`& .${classes.ordinaryHeaderBorder}`]: {
     borderBottom: getBorder(theme),
   },
-  brightHeaderBorder: {
+  [`& .${classes.brightHeaderBorder}`]: {
     borderBottom: getBrightBorder(theme),
   },
-  dayScaleEmptyCell: ({ leftPanelWidth, calculatedLeftPanelWidth }) => ({
+  [`& .${classes.dayScaleEmptyCell}`]: {
     display: 'flex',
     alignItems: 'flex-end',
-    width: leftPanelWidth || theme.spacing(calculatedLeftPanelWidth) + 1,
-    minWidth: leftPanelWidth || theme.spacing(calculatedLeftPanelWidth) + 1,
-  }),
-  flexRow: {
+    width: getEmptyCellWidth(theme, leftPanelWidth, calculatedLeftPanelWidth),
+    minWidth: getEmptyCellWidth(theme, leftPanelWidth, calculatedLeftPanelWidth),
+  },
+  [`& .${classes.flexRow}`]: {
     display: 'flex',
     flexDirection: 'row',
   },
-  relativeContainer: {
+  [`& .${classes.relativeContainer}`]: {
     position: 'relative',
   },
-  inlineFlex: {
+  [`& .${classes.inlineFlex}`]: {
     display: 'inline-flex',
   },
-  background: {
+  [`& .${classes.background}`]: {
     background: theme.palette.background.paper,
   },
 }));
@@ -95,8 +120,6 @@ export const MainLayout = React.memo(({
     ? groupingPanelSize * GROUPING_PANEL_VERTICAL_CELL_WIDTH : 0;
   const calculatedLeftPanelWidth = LEFT_PANEL_WIDTH_SPACING + calculatedGroupPanelWidth;
 
-  const classes = useStyles({ leftPanelWidth, calculatedLeftPanelWidth });
-
   const setBorders = React.useCallback((event) => {
     // eslint-disable-next-line no-bitwise
     if ((!!event.target.scrollLeft ^ isLeftBorderSet)) {
@@ -109,7 +132,9 @@ export const MainLayout = React.memo(({
   }, [isLeftBorderSet, isTopBorderSet]);
 
   return (
-    <div
+    <StyledDiv
+      leftPanelWidth={leftPanelWidth}
+      calculatedLeftPanelWidth={calculatedLeftPanelWidth}
       ref={(node) => {
         layoutRef.current = node;
         if (typeof forwardedRef === 'function') {
@@ -182,7 +207,7 @@ export const MainLayout = React.memo(({
           </div>
         </div>
       </div>
-    </div>
+    </StyledDiv>
   );
 });
 

@@ -1,4 +1,4 @@
-import { darken, alpha, lighten } from '@mui/material/styles';
+import { darken, alpha, lighten } from '@mui/material';
 import { PRIMARY_COLOR } from './constants';
 
 export const getBorder = theme => (`1px solid ${
@@ -71,3 +71,5 @@ export const getViewCellKey = (startDate, groups) => {
 };
 
 export const addCommaAndSpaceToString = string => string && `${string},\xa0`;
+
+export const getEmptyCellWidth = (theme, width, calculatedWidth) => (width ? `${width}px` : `calc(${theme.spacing(calculatedWidth)} + 1px)`);

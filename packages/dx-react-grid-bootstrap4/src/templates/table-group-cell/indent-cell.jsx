@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
 
 export const IndentCell = ({
@@ -28,7 +28,7 @@ IndentCell.propTypes = {
   style: PropTypes.object,
   side: PropTypes.string,
   position: PropTypes.number,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 IndentCell.defaultProps = {

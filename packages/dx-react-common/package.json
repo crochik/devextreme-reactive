@@ -1,24 +1,25 @@
 {
   "private": true,
   "name": "@devexpress/dx-react-common",
-  "version": "3.0.0-beta.1",
+  "version": "4.0.6",
   "description": "DevExtreme React Components",
   "author": {
     "name": "Developer Express Inc.",
     "url": "https://www.devexpress.com/"
   },
   "license": "SEE LICENSE IN README.md",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "yarn webpack --env",
-    "build:prod": "yarn webpack --env.production",
-    "build:watch": "webpack-dev-server --env"
+    "build": "yarn webpack --config webpack.config.cjs --env",
+    "build:prod": "yarn webpack --config webpack.config.cjs --env.production",
+    "build:watch": "webpack-dev-server --config webpack.config.cjs --env"
   },
   "dependencies": {
-    "@devexpress/dx-demo-shell": "3.0.0-beta.1",
-    "@devexpress/dx-react-chart-demos": "3.0.0-beta.1",
-    "@devexpress/dx-react-grid-demos": "3.0.0-beta.1",
-    "@devexpress/dx-react-scheduler-demos": "3.0.0-beta.1",
+    "@devexpress/dx-demo-shell": "4.0.6",
+    "@devexpress/dx-react-chart-demos": "4.0.6",
+    "@devexpress/dx-react-grid-demos": "4.0.6",
+    "@devexpress/dx-react-scheduler-demos": "4.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "whatwg-fetch": "^3.0.0"
@@ -29,7 +30,7 @@
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.8.3",
-    "@devexpress/dx-testing": "3.0.0-beta.1",
+    "@devexpress/dx-testing": "4.0.6",
     "@types/jest": "^26.0.23",
     "babel-loader": "^8.0.6",
     "concurrently": "^5.0.0",

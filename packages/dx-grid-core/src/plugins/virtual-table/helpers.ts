@@ -9,6 +9,7 @@ import {
   GetScrollPosition,
   GetTopRowId,
   GetScrollLeft,
+  IsColumnsWidthDifferent,
 } from '../../types';
 import { arraysEqual } from './utils';
 import { TOP_POSITION, BOTTOM_POSITION, LEFT_POSITION } from './constants';
@@ -18,10 +19,10 @@ const VALID_UNITS = ['px', ''];
 const VIRTUAL_TABLE_ERROR = 'The columnExtension property of the VirtualTable plugin is given an invalid value.';
 
 export const getViewport: GetViewportFn = (
-  state, getters, estimatedRowHeight, getRowHeight, getColumnWidth,
+  state, getters, getRowHeight, getColumnWidth,
 ) => {
   const {
-    viewportTop, viewportLeft, containerWidth, containerHeight, headerHeight, footerHeight,
+    viewportTop, skipItems, viewportLeft, containerWidth, containerHeight,
   } = state;
   const {
     loadedRowsStart,
@@ -34,17 +35,11 @@ export const getViewport: GetViewportFn = (
   } = getters;
 
   const rows = getRowsVisibleBoundary(
-    tableBodyRows, viewportTop, containerHeight - headerHeight - footerHeight,
-    getRowHeight, loadedRowsStart, estimatedRowHeight, isDataRemote,
+    tableBodyRows, viewportTop, containerHeight,
+    getRowHeight, skipItems, loadedRowsStart, isDataRemote,
   );
-  const headerRows = getRowsVisibleBoundary(
-    tableHeaderRows, 0, headerHeight,
-    getRowHeight, 0, estimatedRowHeight, false,
-  );
-  const footerRows = getRowsVisibleBoundary(
-    tableFooterRows, 0, footerHeight,
-    getRowHeight, 0, estimatedRowHeight, false,
-  );
+  const headerRows = [0, tableHeaderRows.length ? tableHeaderRows.length - 1 : 0];
+  const footerRows = [0, tableFooterRows.length ? tableFooterRows.length - 1 : 0];
   const columns = getColumnBoundaries(
     tableColumns, viewportLeft, containerWidth, getColumnWidth,
   );
@@ -140,4 +135,11 @@ export const getTopRowId: GetTopRowId = (viewport, tableBodyRows, isDataRemote) 
   }
 
   return undefined;
+};
+
+export const isColumnsWidthDifferent: IsColumnsWidthDifferent = (prevColumns, columns) => {
+  return prevColumns.some((column) => {
+    const currentColumn = columns.find(c => c.key === column.key);
+    return currentColumn ? currentColumn.width !== column.width : true;
+  });
 };

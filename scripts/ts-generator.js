@@ -1,11 +1,13 @@
-const {
+import {
   readFileSync,
   writeFileSync,
   readdirSync,
   existsSync,
   mkdirSync,
-} = require('fs');
-const { join } = require('path');
+} from 'fs';
+
+import { join } from 'path';
+import { copyCommonJsTypes } from './utils.js';
 
 const ROOT_PATH = join(process.cwd(), 'packages');
 const SOURCE_FOLDER = 'docs/reference';
@@ -15,13 +17,13 @@ const PLUGINS_FOLDER = 'plugins';
 const getComponentName = fileName => fileName
   .replace('.md', '')
   .split('-')
-  .reduce((acc, element) =>
-    acc + element.charAt(0).toUpperCase() + element.slice(1), '');
+  .reduce((acc, element) => acc + element.charAt(0).toUpperCase() + element.slice(1), '');
 
 const cleanElement = element => element.trim()
   .replace(/&lt;/g, '<')
   .replace(/&gt;/g, '>')
   .replace(/&#124;/g, '|')
+  .replace(/&lowbar;/g, '_')
   .replace(/\[([.\w\s]+)\]/g, '$1')
   .replace(/\([/#.\w\s-]+\)/g, '');
 
@@ -344,10 +346,11 @@ const generateTypeScriptForPackage = (packageName) => {
     console.log(`Building TypeScript definitions for '${packageName}-${theme}'.`);
     const themeDistFolder = join(ROOT_PATH, `${packageName}-${theme}`, TARGET_FOLDER);
     ensureDirectory(themeDistFolder);
-    writeFileSync(
-      join(themeDistFolder, `${packageName}-${theme}.d.ts`),
-      themesIndexContent,
-    );
+
+    const dtsOutFile = join(themeDistFolder, `${packageName}-${theme}.d.ts`);
+
+    writeFileSync(dtsOutFile, themesIndexContent);
+    copyCommonJsTypes(dtsOutFile);
   });
 };
 

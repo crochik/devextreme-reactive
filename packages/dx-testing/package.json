@@ -1,13 +1,27 @@
 {
   "private": true,
   "name": "@devexpress/dx-testing",
-  "version": "3.0.0-beta.1",
+  "version": "4.0.6",
   "description": "DevExtreme Reactive Components Testing Utilities",
   "author": {
     "name": "Developer Express Inc.",
     "url": "https://www.devexpress.com/"
   },
   "license": "SEE LICENSE IN README.md",
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/dx-testing.d.cts",
+        "default": "./dist/dx-testing.umd.js"
+      },
+      "import": {
+        "types": "./dist/dx-testing.d.ts",
+        "default": "./dist/dx-testing.es.js"
+      },
+      "default": "./dist/dx-testing.es.js"
+    }
+  },
   "main": "dist/dx-testing.umd.js",
   "module": "dist/dx-testing.es.js",
   "globalName": "DevExpress.DXTesting",
@@ -35,13 +49,13 @@
     "rollup-plugin-license": "^0.12.1"
   },
   "dependencies": {
-    "@devexpress/dx-react-core": "3.0.0-beta.1",
+    "@devexpress/dx-react-core": "4.0.6",
     "enzyme": "3.10.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "util": "^0.12.1"
   },
   "peerDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^29.2.2"
   }
 }

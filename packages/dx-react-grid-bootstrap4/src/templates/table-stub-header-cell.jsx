@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
 
 export const TableStubHeaderCell = ({
@@ -22,7 +22,7 @@ TableStubHeaderCell.propTypes = {
   className: PropTypes.string,
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 TableStubHeaderCell.defaultProps = {

@@ -1,15 +1,232 @@
+# [4.0.6](https://github.com/DevExpress/devextreme-reactive/compare/v4.0.5...v4.0.6) (2023-11-06)
+
+
+### Bug Fixes
+
+* conditional type exports (T1177805) ([#3661](https://github.com/DevExpress/devextreme-reactive/issues/3661)) ([db3373d](https://github.com/DevExpress/devextreme-reactive/commit/db3373d63f05ea3f14adbee523aa86d6ea7798e4))
+* **react-grid-material-ui:** fix styled components' styles that use theme.spacing with a negative sign ([#3660](https://github.com/DevExpress/devextreme-reactive/issues/3660)) ([6f6588a](https://github.com/DevExpress/devextreme-reactive/commit/6f6588a56d64822166fbe6a96b370b4c84098171))
+
+
+### Features
+
+* Matomo setup (dx-site) ([#3663](https://github.com/DevExpress/devextreme-reactive/issues/3663)) ([d25e329](https://github.com/DevExpress/devextreme-reactive/commit/d25e32915ccce87d26b46efe1f649235edfa306e))
+
+
+
+# [4.0.5](https://github.com/DevExpress/devextreme-reactive/compare/v4.0.4...v4.0.5) (2023-07-03)
+
+
+### Bug Fixes
+
+* **react-grid:** fixed scrollbar jumps when scrolling a virtual table with different row heights from bottom to top (T1171681) ([#3657](https://github.com/DevExpress/devextreme-reactive/issues/3657)) ([cd0da0c](https://github.com/DevExpress/devextreme-reactive/commit/cd0da0c3225dd65036ad31811bbb7c6aea3104b4))
+* **react-grid:** fixed a bug when the previous column's sorting was not cleared after the user sorted by a different column and the Sorting State plugin's column extensions were used ([#3647](https://github.com/DevExpress/devextreme-reactive/issues/3647)) ([#3653](https://github.com/DevExpress/devextreme-reactive/issues/3653)) ([5655906](https://github.com/DevExpress/devextreme-reactive/commit/565590645acf0530b1405a8cc6b3fb3e88556f66))
+
+
+
+# [4.0.4](https://github.com/DevExpress/devextreme-reactive/compare/v4.0.3...v4.0.4) (2023-05-16)
+
+
+### Bug Fixes
+
+* **grid-core:** Make a virtual table's viewport calculation band-friendly (T1154239) ([#3643](https://github.com/DevExpress/devextreme-reactive/issues/3643)) ([cf41706](https://github.com/DevExpress/devextreme-reactive/commit/cf41706b97a024fed32e3f9351a725a260067eb0))
+* **react-scheduler:** fix horizontal scale flickering (T1151128) ([#3641](https://github.com/DevExpress/devextreme-reactive/issues/3641)) ([fc2b29e](https://github.com/DevExpress/devextreme-reactive/commit/fc2b29eac986a68afbe06c99f37ea445b8bbbb8b))
+* Update the `react-popper` dependency to v2, by [@glsignal](https://github.com/glsignal) ([345fa12](https://github.com/DevExpress/devextreme-reactive/commit/345fa12dc4c5a953e9c4b80ba4d4fd4d518c7c6f))
+
+
+# [4.0.3](https://github.com/DevExpress/devextreme-reactive/compare/v4.0.2...v4.0.3) (2023-01-26)
+
+
+### Bug Fixes
+
+* Fix esm bundle ([#3629](https://github.com/DevExpress/devextreme-reactive/issues/3629)) ([a97d9d9](https://github.com/DevExpress/devextreme-reactive/commit/a97d9d990fe6522daf28e72299553bbaeb98139c))
+
+
+
+# [4.0.2](https://github.com/DevExpress/devextreme-reactive/compare/v4.0.1...v4.0.2) (2022-12-26)
+
+
+### Bug Fixes
+
+* **scheduler-core:** fix rrule import in bundle ([#3617](https://github.com/DevExpress/devextreme-reactive/pull/3617))
+
+# [4.0.1](https://github.com/DevExpress/devextreme-reactive/compare/v4.0.0...v4.0.1) (2022-12-21)
+
+
+### Bug Fixes
+
+* **react-core:** fix importing of mui packages that do not support ESM yet ([#3608](https://github.com/DevExpress/devextreme-reactive/issues/3608)) ([8ec2bd6](https://github.com/DevExpress/devextreme-reactive/commit/8ec2bd69fc0324b477c5828143a02404c2d0d551))
+* **react-core:** fix types for react 18 (T1130302) ([#3604](https://github.com/DevExpress/devextreme-reactive/issues/3604)) ([2930d7c](https://github.com/DevExpress/devextreme-reactive/commit/2930d7cbf5bdf646b2541e2018a84ea54e6ea70e))
+* **react-scheduler:** fix types ([#3605](https://github.com/DevExpress/devextreme-reactive/issues/3605)) ([eeebfe9](https://github.com/DevExpress/devextreme-reactive/commit/eeebfe9b07713977f94a24b1b7813d51fc0930db))
+
+
+
+# [4.0.0](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.6...v4.0.0) (2022-11-25)
+
+
+### Features
+
+* support ES module ([#3595](https://github.com/DevExpress/devextreme-reactive/issues/3595)) ([9b79e78](https://github.com/DevExpress/devextreme-reactive/commit/9b79e783d6c0c7de15e69dd55461fa5457f35ce1))
+
+
+
+# [3.0.6](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.5...v3.0.6) (2022-10-14)
+
+
+### Bug Fixes
+
+* **chart-core:** fix security issue ([#3578](https://github.com/DevExpress/devextreme-reactive/issues/3578)) ([e70cad9](https://github.com/DevExpress/devextreme-reactive/commit/e70cad9979a25f2bc28a454086a3a60c34f576f0))
+* **core:** fix updating plugins ([#3573](https://github.com/DevExpress/devextreme-reactive/issues/3573)) ([da2bed3](https://github.com/DevExpress/devextreme-reactive/commit/da2bed37330aabf8120bff7436524cc738dd7fef))
+* **react-common:** add children property in the themes ([#3568](https://github.com/DevExpress/devextreme-reactive/issues/3568)) ([6a761e2](https://github.com/DevExpress/devextreme-reactive/commit/6a761e259f83d616b2e5f5b329b5064f85c64acd))
+* **react-grid:** fix flickering of virtual table (T1108194) ([#3567](https://github.com/DevExpress/devextreme-reactive/issues/3567)) ([31ef862](https://github.com/DevExpress/devextreme-reactive/commit/31ef862d2d4b0b04da9e1e5fb466765c40a245bf))
+* **react-grid:** fix grid flickers after scrolling (T1118401) ([#3574](https://github.com/DevExpress/devextreme-reactive/issues/3574)) ([d37014a](https://github.com/DevExpress/devextreme-reactive/commit/d37014ac10b1e24d6c29ae091133a6c86f78dae6))
+* **react-grid:** fix grid scrolling with lazy loading (T1106910) ([#3572](https://github.com/DevExpress/devextreme-reactive/issues/3572)) ([af65a74](https://github.com/DevExpress/devextreme-reactive/commit/af65a74cb6814798a888ac85f042599e9e4d7121))
+* **react-grid:** fix typescript for grouping panel ([#3580](https://github.com/DevExpress/devextreme-reactive/issues/3580)) ([458174a](https://github.com/DevExpress/devextreme-reactive/commit/458174a8f1a08ae6b811cba092f8eb656f607794))
+* **react-scheduler:** fix deleting first oppointment ([#3582](https://github.com/DevExpress/devextreme-reactive/issues/3582)) ([9bf1f70](https://github.com/DevExpress/devextreme-reactive/commit/9bf1f7070e676be3d33dba86b078ccf9119b7074))
+
+
+
+# [3.0.5](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.4...v3.0.5) (2022-08-22)
+
+
+### Bug Fixes
+
+* **react-common:** add children property (T1104887) ([#3563](https://github.com/DevExpress/devextreme-reactive/issues/3563)) ([ec1aa9f](https://github.com/DevExpress/devextreme-reactive/commit/ec1aa9fd05aa03e6c2843b220eaeb0ec304f2d50))
+* **react-grid:** fix banded columns in virtual table (T1107446) ([#3565](https://github.com/DevExpress/devextreme-reactive/issues/3565)) ([617f37c](https://github.com/DevExpress/devextreme-reactive/commit/617f37c2f78ea9ed49c87572634822ecf0466c37))
+* **react-grid:** fix column resizing for VirtualTable (T1106563) ([#3564](https://github.com/DevExpress/devextreme-reactive/issues/3564)) ([02eb6bd](https://github.com/DevExpress/devextreme-reactive/commit/02eb6bd00400887930c03a78742c67c0f5a45bec))
+
+
+
+# [3.0.4](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.3...v3.0.4) (2022-07-12)
+
+
+### Bug Fixes
+
+* **react-core:** fix dragging on unmount component (T1093143)  ([53502ae](https://github.com/DevExpress/devextreme-reactive/commit/53502aef1f0f3884779bc8695bdc5d9e27afcb7d))
+* **react-grid:** fix column resizing after its reordering (T1096930) ([#3557](https://github.com/DevExpress/devextreme-reactive/issues/3557)) ([ae205dd](https://github.com/DevExpress/devextreme-reactive/commit/ae205ddb51015626a7902080891964c753bb6a85))
+* **react-grid:** fix grouping for react 18 ([#3556](https://github.com/DevExpress/devextreme-reactive/issues/3556)) ([edc0d60](https://github.com/DevExpress/devextreme-reactive/commit/edc0d60368ee0a708fcdb0ed76e611dda3cd2192))
+* **react-grid:** fix render big amount of the rows in virtual table ([#3550](https://github.com/DevExpress/devextreme-reactive/issues/3550)) ([c240410](https://github.com/DevExpress/devextreme-reactive/commit/c2404106b5942e9cf99666406beee9e5e23e6194))
+* **react-scheduler:** fix DateTimePicker on Esc pressed (T1099508) ([#3558](https://github.com/DevExpress/devextreme-reactive/issues/3558)) ([84792af](https://github.com/DevExpress/devextreme-reactive/commit/84792afb808d8f299871b0a0afe24cfea2e5b1e5))
+
+
+
+# [3.0.3](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.2...v3.0.3) (2022-05-10)
+
+
+### Bug Fixes
+
+* **core:** fix changing vizability for series(T1073127) ([#3535](https://github.com/DevExpress/devextreme-reactive/issues/3535)) ([15e95d6](https://github.com/DevExpress/devextreme-reactive/commit/15e95d63f3ad8df30ed4ef8e630690e32373b3a6))
+* **core:** make dx-core type public for fix lib check react-grid compilation error ([#3538](https://github.com/DevExpress/devextreme-reactive/issues/3538)) ([629e905](https://github.com/DevExpress/devextreme-reactive/commit/629e9057c0562c7d11fc5400f725555ab327fc74))
+* **react-chart:** apply right series hatching color for 2 charts with same selection state ([#3536](https://github.com/DevExpress/devextreme-reactive/issues/3536)) ([3a2789e](https://github.com/DevExpress/devextreme-reactive/commit/3a2789e9602349f2df2e85f5392fde96cab7d02f))
+* **react-chart:** fix chart in bootstrap and fix hover elements ([#3545](https://github.com/DevExpress/devextreme-reactive/issues/3545)) ([8d76c42](https://github.com/DevExpress/devextreme-reactive/commit/8d76c420460648a40be3f0d500b32e5021e5b306))
+* **react-grid:** add forwardedRef property in doc ([#3534](https://github.com/DevExpress/devextreme-reactive/issues/3534)) ([82c8006](https://github.com/DevExpress/devextreme-reactive/commit/82c8006d9ec73f7b345dfa53c365bf17fe44fb18))
+* **react-grid:** fix column reordering (T1079946) ([#3543](https://github.com/DevExpress/devextreme-reactive/issues/3543)) ([06166f2](https://github.com/DevExpress/devextreme-reactive/commit/06166f2b9678fc22f96b8014208bce40b2b79c6c))
+* **react-grid:** fix grouping with Banded columns ([#3541](https://github.com/DevExpress/devextreme-reactive/issues/3541)) ([dd88f70](https://github.com/DevExpress/devextreme-reactive/commit/dd88f705e9f88e3acf5a242d9e0c6d65ff4fbaa4))
+* **react-grid:** fix displaying data in virtual table ([#3529](https://github.com/DevExpress/devextreme-reactive/issues/3529)) ([304489b](https://github.com/DevExpress/devextreme-reactive/commit/304489bd7794160984ea51ec6822dc55ea2858e0))
+* **react-grid-material-ui:** column headers are not fixed on vertical scrolling if the TableFixedColumns plugin is used (T1079942) ([#3539](https://github.com/DevExpress/devextreme-reactive/issues/3539)) ([c168da5](https://github.com/DevExpress/devextreme-reactive/commit/c168da5f3e9f5745440a53f3aa631993ce7d9f64))
+* **react-scheduler:** fix displaying edit form ([#3537](https://github.com/DevExpress/devextreme-reactive/issues/3537)) ([6ae6d8e](https://github.com/DevExpress/devextreme-reactive/commit/6ae6d8e51bfe7a324a1dce025abf6661c40d299c))
+* **react-scheduler-material-ui:** A circle icon doesn't apply a color set in a resource in an appointment tooltip ([#3540](https://github.com/DevExpress/devextreme-reactive/issues/3537)) ([7f7e9bc](https://github.com/DevExpress/devextreme-reactive/commit/7f7e9bc44331c9068b0aa9ab9c0cf69d32569b54))
+
+
+
+# [3.0.2](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.1...v3.0.2) (2022-02-24)
+
+
+### Bug Fixes
+
+* **chore:** fix third element update ([#3511](https://github.com/DevExpress/devextreme-reactive/issues/3511)) ([9b99074](https://github.com/DevExpress/devextreme-reactive/commit/9b99074dc69aa5e5113840d981f7ad4ddffab4e8))
+* **react-grid:** fix virtualTable with resizing (T1067026) ([#3523](https://github.com/DevExpress/devextreme-reactive/issues/3523)) ([52a151f](https://github.com/DevExpress/devextreme-reactive/commit/52a151fdd174b592a0c55158e8c1207a68f2b988))
+* **react-grid-material-ui:** fix header row (T1068611) ([#3521](https://github.com/DevExpress/devextreme-reactive/issues/3521)) ([41cad0e](https://github.com/DevExpress/devextreme-reactive/commit/41cad0e457c99a1f137df1415a6e6b86943f05bc))
+* **react-grid-material-ui:** remove the `forwardedRef` prop from a DOM (T1068005) ([#3520](https://github.com/DevExpress/devextreme-reactive/issues/3520)) ([3ad77df](https://github.com/DevExpress/devextreme-reactive/commit/3ad77df91143c5b055a5bb28153e84ea5109c94c))
+* **react-scheduler:** fix type for endDate in AppointmentModel ([#3518](https://github.com/DevExpress/devextreme-reactive/issues/3518)) ([6a29837](https://github.com/DevExpress/devextreme-reactive/commit/6a29837931ca8a9acd1ffa593627910f7711dfe7))
+* **site:** fix static fields on site ([#3512](https://github.com/DevExpress/devextreme-reactive/issues/3512)) ([522c0c1](https://github.com/DevExpress/devextreme-reactive/commit/522c0c10d40750b4943496e26414222977fcca84))
+
+
+
+# [3.0.1](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.0...v3.0.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* **react-grid:** fix scrolling in virual table ([#3506](https://github.com/DevExpress/devextreme-reactive/issues/3506)) ([d640672](https://github.com/DevExpress/devextreme-reactive/commit/d640672034c392e8a2d525b66f64187c4213fa89))
+* **react-grid:** make summary row fixed ([#3499](https://github.com/DevExpress/devextreme-reactive/issues/3499)) ([6084aae](https://github.com/DevExpress/devextreme-reactive/commit/6084aaedb7815f60c66749b76f157eb73f84c7e7))
+* **react-scheduler:** add params for commit ([#3500](https://github.com/DevExpress/devextreme-reactive/issues/3500)) ([c2d65e8](https://github.com/DevExpress/devextreme-reactive/commit/c2d65e8c2368aeab5f43c4617b48eb924ddd78ef))
+* **react-scheduler:** fix error for overlapping appointments ([#3498](https://github.com/DevExpress/devextreme-reactive/issues/3498)) ([d2fdbb8](https://github.com/DevExpress/devextreme-reactive/commit/d2fdbb897e529334a3be6e9467198d6a718ea7ee))
+* **react-scheduler:** rename field in WeeklyRecurrenceSelectorProps ([#3501](https://github.com/DevExpress/devextreme-reactive/issues/3501)) ([46a8e3a](https://github.com/DevExpress/devextreme-reactive/commit/46a8e3a48da3e0fa457700759df8039b63c7b6a9))
+
+
+
+# [3.0.0](https://github.com/DevExpress/devextreme-reactive/compare/v2.7.6...v3.0.0) (2022-01-31)
+
+
+### Bug Fixes
+
+* **react-grid:** add dependence in the TableBandHeader plugin ([#3483](https://github.com/DevExpress/devextreme-reactive/issues/3483)) ([5eaf231](https://github.com/DevExpress/devextreme-reactive/commit/5eaf2314424bd87a97c8d04355f11b49b8a6ba2d))
+* **react-grid:** extend type of Filter value ([#3488](https://github.com/DevExpress/devextreme-reactive/issues/3488)) ([65005d0](https://github.com/DevExpress/devextreme-reactive/commit/65005d0ee267b4756f652047ccb8cc8961385e27))
+* **react-grid:** fix calculating colSpan for virtualTable ([#3469](https://github.com/DevExpress/devextreme-reactive/issues/3469)) ([a8686e4](https://github.com/DevExpress/devextreme-reactive/commit/a8686e49b76db88a086ab9378e08276bac30b8ba))
+* **react-grid:** fix colspan calculation ([#3471](https://github.com/DevExpress/devextreme-reactive/issues/3471)) ([5c44427](https://github.com/DevExpress/devextreme-reactive/commit/5c444276e4c556caabba80d5940500393ee7b335))
+* **react-grid:** fix changing a visibility of a column with selectors(T1032186) ([#3458](https://github.com/DevExpress/devextreme-reactive/issues/3458)) ([4c77781](https://github.com/DevExpress/devextreme-reactive/commit/4c77781be53e0c3abf87bcb1ce71eced60c8f478))
+* **react-grid:** fix page freezes on drag and drop ([#3462](https://github.com/DevExpress/devextreme-reactive/issues/3462)) ([6f000e0](https://github.com/DevExpress/devextreme-reactive/commit/6f000e0f1c312dc9f5810501718db915376bfc1c))
+* **react-grid:** fix render of group cell of second level ([#3479](https://github.com/DevExpress/devextreme-reactive/issues/3479)) ([b7c3919](https://github.com/DevExpress/devextreme-reactive/commit/b7c3919ec5f028decfd6da75313085ad6061d739))
+* **react-grid:** fix type DataTypeProvider.ValueEditorProps ([#3484](https://github.com/DevExpress/devextreme-reactive/issues/3484)) ([c9c93d0](https://github.com/DevExpress/devextreme-reactive/commit/c9c93d0520f6a38c0453c75b7c963837caf977b2))
+* **react-grid:** fix type description in docs for toggleColumnVisibility (T1029991) ([#3446](https://github.com/DevExpress/devextreme-reactive/issues/3446)) ([4e5500f](https://github.com/DevExpress/devextreme-reactive/commit/4e5500fb8e7849539628a5ec2618c7e1291b025a))
+* **react-grid:** prevent resize of the column out the left side of window ([#3486](https://github.com/DevExpress/devextreme-reactive/issues/3486)) ([bb11855](https://github.com/DevExpress/devextreme-reactive/commit/bb118558ad36aa86337d5958e96b4af8734b2cd4))
+* **react-scheduler:** fix adding appointment after editing in control mode(T1024087) ([#3463](https://github.com/DevExpress/devextreme-reactive/issues/3463)) ([462dbeb](https://github.com/DevExpress/devextreme-reactive/commit/462dbebd61013c1e697f11285f00844ba01fd9fd))
+* **react-scheduler:** fix container classes ([#3456](https://github.com/DevExpress/devextreme-reactive/issues/3456)) ([1b40305](https://github.com/DevExpress/devextreme-reactive/commit/1b40305adf1bea84982fee860a30dd49a5e91c7d))
+* **react-scheduler:** fix scrolling after migrate from jss ([#3487](https://github.com/DevExpress/devextreme-reactive/issues/3487)) ([372dbc2](https://github.com/DevExpress/devextreme-reactive/commit/372dbc279ca123bd6dcffc451112109907a83e8b))
+* **react-scheduler:** make `timeScaleTickCellComponent` property public ([#3474](https://github.com/DevExpress/devextreme-reactive/issues/3474)) ([cee2043](https://github.com/DevExpress/devextreme-reactive/commit/cee2043c95ffd57b7c657096f93a41a2688e9ee6))
+* **react-scheduler:** actualize types for EditingState ([#3485](https://github.com/DevExpress/devextreme-reactive/issues/3485)) ([8fece29](https://github.com/DevExpress/devextreme-reactive/commit/8fece298d90dfde52894095fd683ba939c468f83))
+
+
+### Features
+
+* **react-grid:** use one table instead few in VirtualTable ([#3451](https://github.com/DevExpress/devextreme-reactive/issues/3451)) ([9487c6c](https://github.com/DevExpress/devextreme-reactive/commit/9487c6c811a423d5d8626a23102742afdcd2926a))
+
+
+### BREAKING CHANGES
+
+* **react-grid:** Now, declare the `TableColumnVisibility` plug-in before the `TableBandHeader` plug-in to correctly calculate column spans and borders.
+
+```diff
+...
++<TableColumnVisibility
++  defaultHiddenColumnNames={...}
++/>
+...
+<TableBandHeader
+  columnBands={columnBands}
+/>
+...
+-<TableColumnVisibility
+-  defaultHiddenColumnNames={...}
+-/>
+...
+```
+
+
+
+# [3.0.0-beta.2](https://github.com/DevExpress/devextreme-reactive/compare/v3.0.0-beta.1...v3.0.0-beta.2) (2021-11-22)
+
+
+### Bug Fixes
+
+* **react-grid:** fix console error ([#3442](https://github.com/DevExpress/devextreme-reactive/issues/3442)) ([6470942](https://github.com/DevExpress/devextreme-reactive/commit/64709429bbace01b1f8e246ce9470f588f919ac0))
+* **react-grid:** fix enter action in inline cell editing ([#3431](https://github.com/DevExpress/devextreme-reactive/issues/3431)) ([cd8aea0](https://github.com/DevExpress/devextreme-reactive/commit/cd8aea07d516b69d4992006894ae92d82e55ec69))
+* **react-scheduler:** use correct type for ConfirmationDialog's messages ([#3433](https://github.com/DevExpress/devextreme-reactive/issues/3433)) ([e6e9e02](https://github.com/DevExpress/devextreme-reactive/commit/e6e9e024a77e9342026a231167a77977c70d900f))
+
+
+
 # [3.0.0-beta.1](https://github.com/DevExpress/devextreme-reactive/compare/v2.7.6...v3.0.0-beta.1) (2021-10-21)
 
 
 ### Bug Fixes
 
-* **react-core:** Do not treat right mouse click as the start of dragging (T1005625) ([#3358](https://github.com/DevExpress/devextreme-reactive/issues/3358)) ([f3bfe6a](https://github.com/DevExpress/devextreme-reactive/commit/f3bfe6a786718cdb2d6737cb59d0fb114423a0cc))
+* **react-core:** do not treat right mouse click as the start of dragging (T1005625) ([#3358](https://github.com/DevExpress/devextreme-reactive/issues/3358)) ([f3bfe6a](https://github.com/DevExpress/devextreme-reactive/commit/f3bfe6a786718cdb2d6737cb59d0fb114423a0cc))
 * **react-core:** pass refs to components to get rid of findDOMNode ([#3404](https://github.com/DevExpress/devextreme-reactive/issues/3404)) ([11b9a0d](https://github.com/DevExpress/devextreme-reactive/commit/11b9a0d86aedfb3a6c09bf40daf031664f3a20a7))
 
 
 ### Features
 
-* **react-core:** Migrate to MUI v5 ([#3414](https://github.com/DevExpress/devextreme-reactive/issues/3414)) ([0fdf80f](https://github.com/DevExpress/devextreme-reactive/commit/0fdf80f9cb3d8e2bc77bc004690571351a47fffd))
+* **react-core:** migrate to MUI v5 ([#3414](https://github.com/DevExpress/devextreme-reactive/issues/3414)) ([0fdf80f](https://github.com/DevExpress/devextreme-reactive/commit/0fdf80f9cb3d8e2bc77bc004690571351a47fffd))
 * **react-grid:** keyboard navigation ([#3386](https://github.com/DevExpress/devextreme-reactive/issues/3386)) ([4bae36f](https://github.com/DevExpress/devextreme-reactive/commit/4bae36f4298b9531f1a88055407c6d6fdf2af9f1))
 
 

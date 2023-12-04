@@ -9,9 +9,11 @@
     "type": "git",
     "url": "git+https://github.com/DevExpress/devextreme-reactive.git"
   },
+  "type": "module",
   "license": "SEE LICENSE IN README.md",
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.6.1",
+    "@microsoft/api-extractor": "7.20.0",
+    "@types/react-test-renderer": "^16.0.0",
     "check-node-version": "^4.0.1",
     "concurrently": "^5.0.0",
     "conventional-changelog-cli": "^2.0.28",
@@ -27,7 +29,6 @@
     "inquirer": "^7.0.0",
     "lerna": "^3.18.5",
     "react-test-renderer": "^16.14.0",
-    "@types/react-test-renderer":"^16.0.0",
     "replace-in-file": "^4.2.0",
     "rimraf": "^3.0.0",
     "run-sequence": "^2.2.1",
@@ -35,7 +36,7 @@
     "start-server-and-test": "^1.11.0",
     "testcafe": "^1.8.6",
     "testcafe-reporter-xunit": "^2.1.0",
-    "typescript": "4.1.3"
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "postinstall": "check-node-version --node \">=6.11.1\" --npm \">=5.3.0\" --yarn \">=1.0.0\"",
@@ -55,9 +56,15 @@
     "lint:fix": "lerna run lint:fix --ignore @devexpress/dx-vue-*",
     "lint:ci": "lerna run lint:ci",
     "test": "lerna run test --ignore @devexpress/dx-vue-* && yarn test:bs4 && yarn test:scheduler:pacific",
-    "test:ci": "yarn update-api:ci && lerna run test --ignore @devexpress/dx-vue-* -- -- --maxWorkers=1 --max-old-space-size=4096 && yarn test:bs4 && yarn test:scheduler:pacific",
+    "test:ci": "yarn update-api:ci && lerna run test --ignore @devexpress/dx-vue-* -- -- --runInBand --max-old-space-size=4096 && yarn test:bs4 && yarn test:scheduler:pacific",
     "testcafe:ci": "start-server-and-test start-demo-servers \"3002|3004|3005\" testcafe:ci:start",
     "testcafe:ci:start": "testcafe -q",
+    "testcafe:ci:grid": "start-server-and-test start-demo-servers \"3002\" testcafe:ci:grid:start",
+    "testcafe:ci:grid:start": "testcafe --fixture-meta instance=1",
+    "testcafe:ci:chart": "start-server-and-test start-demo-servers \"3004\" testcafe:ci:chart:start",
+    "testcafe:ci:chart:start": "testcafe --fixture-meta instance=2",
+    "testcafe:ci:scheduler": "start-server-and-test start-demo-servers \"3005\" testcafe:ci:scheduler:start",
+    "testcafe:ci:scheduler:start": "testcafe --fixture-meta instance=3",
     "testcafe:local": "start-server-and-test start-demo-servers \"3002|3004|3005\" testcafe:local:start",
     "testcafe:local:start": "testcafe chrome ./**/*.testcafe.js --skip-js-errors",
     "test:bs4": "jest packages/dx-react-bootstrap4 --ci --silent --runInBand --bail",

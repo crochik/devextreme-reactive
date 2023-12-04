@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const getColor = (amount) => {
   if (amount < 3000) {
@@ -38,7 +38,7 @@ HighlightedCell.propTypes = {
   style: PropTypes.object,
   children: PropTypes.node,
   tabIndex: PropTypes.number,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
   className: PropTypes.string,
 };
 HighlightedCell.defaultProps = {

@@ -1,12 +1,12 @@
 /* eslint-disable */
 
 var path = require('path');
-var webpack = require('webpack');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = ({ production }) => ({
   mode: production ? 'production' : 'development',
   context: path.join(__dirname, 'src'),
+  devtool: "inline-source-map",
   entry: {
     index: ['whatwg-fetch', path.join(__dirname, 'src', 'index')]
   },
@@ -18,14 +18,8 @@ module.exports = ({ production }) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: /(node_modules\/)/,
-        use: ["source-map-loader"],
-        enforce: "pre"
-      },
-      {
         test: /\.tsx?$/,
-        loader: "awesome-typescript-loader"
+        loader: "ts-loader"
       },
       {
         test: /\.jsx?$/,
@@ -35,12 +29,6 @@ module.exports = ({ production }) => ({
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
-      },
-      {
-        test: /\.svg$/,
-        use: {
-            loader: 'svg-sprite-loader',
-        }
       }
     ]
   },
@@ -53,7 +41,7 @@ module.exports = ({ production }) => ({
   ],
   devServer: {
     host: '0.0.0.0',
-    port: 3002,
+    port: 3005,
     historyApiFallback: true,
     disableHostCheck: true,
   }

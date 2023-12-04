@@ -1,5 +1,3 @@
-export { GetMessageFn } from '../../../dx-core/src/types';
-
 export {
   Column, TableColumn, TableRow, SummaryType, ColumnSummary, EditingCell,
   ColumnDimensions, ColumnAnimationStyleMap, SummaryItem, IntegratedFiltering,
@@ -7,6 +5,7 @@ export {
   Sorting, TargetColumnGeometry, FilterOperation, ColumnChooserItem,
   TableColumnWidthInfo, TableColumnResizing, RowId, GridViewport, GroupSummaryItem,
   ColumnInlineSummaries, FocusedElement, OnFocusedCellChangeFn, FocusedCell, ScrollToColumnFn,
+  InlineEditing,
 } from '../../../dx-grid-core/src/index';
 
 /** @internal */

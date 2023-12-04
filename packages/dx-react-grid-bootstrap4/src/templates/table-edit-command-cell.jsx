@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'clsx';
 
 export const CommandButton = ({
@@ -55,7 +55,7 @@ EditCommandHeadingCell.propTypes = {
   tableColumn: PropTypes.object,
   tableRow: PropTypes.object,
   className: PropTypes.string,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 EditCommandHeadingCell.defaultProps = {
@@ -92,7 +92,7 @@ EditCommandCell.propTypes = {
   tableRow: PropTypes.object,
   row: PropTypes.any,
   className: PropTypes.string,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 EditCommandCell.defaultProps = {

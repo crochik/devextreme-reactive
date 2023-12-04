@@ -302,7 +302,7 @@ export interface ConfirmationDialogProps {
   ignoreCancel?: boolean;
   ignoreDelete?: boolean;
   layoutComponent?: React_2.ComponentType<ConfirmationDialog_2.LayoutProps>;
-  messages?: React_2.ComponentType<ConfirmationDialog_2.LocalizationMessages>;
+  messages?: ConfirmationDialog_2.LocalizationMessages;
   overlayComponent?: React_2.ComponentType<ConfirmationDialog_2.OverlayProps>;
 }
 
@@ -382,6 +382,11 @@ export namespace DayView {
 
 // @public (undocumented)
 export namespace DayView {
+  export type TimeScaleTickCellProps = DayView_2.TimeScaleTickCellProps;
+}
+
+// @public (undocumented)
+export namespace DayView {
   export type DayScaleLayoutProps = DayView_2.DayScaleLayoutProps;
 }
 
@@ -420,6 +425,7 @@ export const DayView: React_2.ComponentType<DayViewProps> & {
   Layout: React_2.ComponentType<DayView_2.LayoutProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   TimeScaleLayout: React_2.ComponentType<DayView_2.TimeScaleLayoutProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   TimeScaleLabel: React_2.ComponentType<DayView_2.TimeScaleLabelProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
+  TimeScaleTickCell: React_2.ComponentType<DayView_2.TimeScaleTickCellProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   DayScaleLayout: React_2.ComponentType<DayView_2.DayScaleLayoutProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   DayScaleCell: React_2.ComponentType<DayView_2.DayScaleCellProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   DayScaleRow: React_2.ComponentType<DayView_2.RowProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
@@ -446,6 +452,7 @@ export interface DayViewProps {
   startDayHour?: number;
   timeScaleLabelComponent?: React_2.ComponentType<DayView_2.TimeScaleLabelProps>;
   timeScaleLayoutComponent?: React_2.ComponentType<DayView_2.TimeScaleLayoutProps>;
+  timeScaleTickCellComponent?: React_2.ComponentType<DayView_2.TimeScaleTickCellProps>;
   timeTableCellComponent?: React_2.ComponentType<DayView_2.TimeTableCellProps>;
   timeTableLayoutComponent?: React_2.ComponentType<DayView_2.TimeTableLayoutProps>;
   timeTableRowComponent?: React_2.ComponentType<DayView_2.RowProps>;
@@ -652,6 +659,7 @@ export const Scheduler: React_2.ComponentType<SchedulerProps> & {
 
 // @public (undocumented)
 export interface SchedulerProps {
+  children?: React_2.ReactNode;
   data?: Array<AppointmentModel>;
   firstDayOfWeek?: number;
   height?: number | `auto`;
@@ -734,6 +742,11 @@ export namespace WeekView {
 
 // @public (undocumented)
 export namespace WeekView {
+  export type TimeScaleTickCellProps = WeekView_2.TimeScaleTickCellProps;
+}
+
+// @public (undocumented)
+export namespace WeekView {
   export type DayScaleLayoutProps = WeekView_2.DayScaleLayoutProps;
 }
 
@@ -772,6 +785,7 @@ export const WeekView: React_2.ComponentType<WeekViewProps> & {
   Layout: React_2.ComponentType<WeekView_2.LayoutProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   TimeScaleLayout: React_2.ComponentType<WeekView_2.TimeScaleLayoutProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   TimeScaleLabel: React_2.ComponentType<WeekView_2.TimeScaleLabelProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
+  TimeScaleTickCell: React_2.ComponentType<WeekView_2.TimeScaleTickCellProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   DayScaleLayout: React_2.ComponentType<WeekView_2.DayScaleLayoutProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   DayScaleCell: React_2.ComponentType<WeekView_2.DayScaleCellProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
   DayScaleRow: React_2.ComponentType<WeekView_2.RowProps & { className?: string; style?: React_2.CSSProperties; [x: string]: any }>;
@@ -799,6 +813,7 @@ export interface WeekViewProps {
   startDayHour?: number;
   timeScaleLabelComponent?: React_2.ComponentType<WeekView_2.TimeScaleLabelProps>;
   timeScaleLayoutComponent?: React_2.ComponentType<WeekView_2.TimeScaleLayoutProps>;
+  timeScaleTickCellComponent?: React_2.ComponentType<WeekView_2.TimeScaleTickCellProps>;
   timeTableCellComponent?: React_2.ComponentType<WeekView_2.TimeTableCellProps>;
   timeTableLayoutComponent?: React_2.ComponentType<WeekView_2.TimeTableLayoutProps>;
   timeTableRowComponent?: React_2.ComponentType<WeekView_2.RowProps>;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { SelectionControl } from './parts/selection-control';
 
@@ -38,7 +38,7 @@ TableSelectAllCell.propTypes = {
   tableRow: PropTypes.object,
   tableColumn: PropTypes.object,
   rowSpan: PropTypes.number,
-  forwardedRef: PropTypes.object,
+  forwardedRef: PropTypes.func,
 };
 
 TableSelectAllCell.defaultProps = {

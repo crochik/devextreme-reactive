@@ -4,17 +4,19 @@ import { TableColumn, TableRow, GetCellColSpanFn } from './table.types';
 import { RIGHT_POSITION, LEFT_POSITION } from '../plugins/virtual-table/constants';
 
 /** @internal */
-export type GetColumnWidthFn = PureComputed<[TableColumn, number?], number | null>;
+export type GetColumnWidthFn = PureComputed<[TableColumn?], number>;
 /** @internal */
-export type GetRowHeightFn = PureComputed<[TableRow, number?], number>;
+export type GetRowHeightFn = PureComputed<[TableRow?], number>;
 /** @internal */
-export type GetColSpanFn = PureComputed<[TableRow, TableColumn?], number>;
+export type GetRowColumnSizeFn = PureComputed<[(TableRow|TableColumn)?], number>;
 /** @internal */
-export type CollapsedColumn = TableColumn & { width: number };
+export type GetColSpanFn = PureComputed<[TableRow, TableColumn], number>;
+/** @internal */
+export type CollapsedColumn = TableColumn & { width: number|undefined };
 /** @internal */
 export type CollapsedCell = { column: Pick<TableColumn, 'key' | 'type'>, colSpan: number };
 /** @internal */
-type CollapsedRow = TableRow & { cells: any[], height: number };
+export type CollapsedRow = TableRow & { cells: any[], height: number };
 
 /** @internal */
 export type VisibleBoundary = ReadonlyArray<number>;
@@ -30,9 +32,10 @@ export type GridViewport = {
   width: number;
   height: number;
 };
+type SkipItems = [number, number];
 /** @internal */
 export type GetVisibleBoundaryFn = PureComputed<
-  [ReadonlyArray<any>, number, number, (item: any) => number | null, number, number?],
+  [ReadonlyArray<any>, number, number, GetRowHeightFn, SkipItems, number?],
   VisibleBoundary
 >;
 
@@ -40,6 +43,12 @@ export type GetVisibleBoundaryFn = PureComputed<
 export type GetVisibleBoundaryWithFixedFn = PureComputed<
   [VisibleBoundary, ReadonlyArray<TableColumn>],
   VisibleBoundary[]
+>;
+
+/** @internal */
+export type GetVisibleBoundaryWithFixedPredicate = PureComputed<
+  [TableColumn, number, VisibleBoundary],
+  boolean
 >;
 
 /** @internal */
@@ -55,10 +64,15 @@ export type CollapseBoundariesFn = PureComputed<
 >;
 
 /** @internal */
-export type GetColumnsSizeFn = PureComputed<
-  [TableColumn[], number, number, GetColumnWidthFn],
+export type GetItemSizeFn = PureComputed<
+  [TableColumn[]|TableRow[], number, number, GetRowColumnSizeFn],
   number
 >;
+
+/** @internal */
+export type CalculateRowHeightFn = PureComputed<
+[TableRow[], SkipItems, GetRowHeightFn, number, number],
+number>;
 
 /** @internal */
 export type GetCollapsedColumnsFn = PureComputed<
@@ -69,13 +83,13 @@ export type GetCollapsedColumnsFn = PureComputed<
 /** @internal */
 export type GetCollapsedAndStubRowsFn = PureComputed<
 // tslint:disable-next-line: max-line-length
-  [TableRow[], VisibleBoundary, VisibleBoundary[], GetRowHeightFn, (r: TableRow) => ReadonlyArray<any>, number],
+  [TableRow[], VisibleBoundary, VisibleBoundary[], SkipItems, GetRowHeightFn, (r: TableRow) => ReadonlyArray<any>, number],
   CollapsedRow[]
 >;
 
 /** @internal */
 export type GetCollapsedCellsFn = PureComputed<
-  [TableColumn[], VisibleBoundary[], VisibleBoundary[], GetColSpanFn],
+  [TableRow, TableColumn[], VisibleBoundary[], VisibleBoundary[], GetColSpanFn],
   CollapsedCell[]
 >;
 
@@ -84,7 +98,8 @@ export type GetCollapsedGridFn = PureComputed<
   [{
     rows: TableRow[], columns: TableColumn[],
     rowsVisibleBoundary?: VisibleBoundary, columnsVisibleBoundary: VisibleBoundary[],
-    getColumnWidth: GetColumnWidthFn, getRowHeight: GetRowHeightFn,
+    getColumnWidth: GetColumnWidthFn,
+    getRowHeight: GetRowHeightFn,
     getColSpan: GetColSpanFn,
     totalRowCount: number,
     offset: number,
@@ -107,6 +122,7 @@ export type GetCollapsedGridsFn = PureComputed<
     viewportLeft: number,
     containerWidth: number,
     viewport: GridViewport,
+    skipItems: SkipItems,
     getColumnWidth: GetColumnWidthFn,
     getRowHeight: GetRowHeightFn,
   }],
@@ -125,7 +141,7 @@ export type GetColumnWidthGetterFn = PureComputed<
 
 /** @internal */
 export type GetViewportFn = PureComputed<
-  [any, Getters, number, GetRowHeightFn, GetColumnWidthFn], GridViewport
+  [any, Getters, GetRowHeightFn, GetColumnWidthFn], GridViewport
 >;
 
 /** @internal */
@@ -135,7 +151,7 @@ export type GetSpecificRenderBoundaryFn = PureComputed<[number, number[]], numbe
 
 /** @internal */
 export type GetRowsVisibleBoundaryFn = PureComputed<
-[TableRow[], number, number, GetRowHeightFn, number, number, boolean?], VisibleBoundary
+[TableRow[], number, number, GetRowHeightFn, SkipItems, number, boolean?], VisibleBoundary
 >;
 
 type PageTriggersMeta = {
@@ -176,3 +192,5 @@ export type GetTopRowId = PureComputed<
 export type GetScrollLeft = PureComputed<
   [number, number, typeof LEFT_POSITION | typeof RIGHT_POSITION | undefined], number | undefined
 >;
+/** @internal */
+export type IsColumnsWidthDifferent = PureComputed<[TableColumn[], TableColumn[]], boolean>;
